@@ -63,7 +63,10 @@ namespace VvandConfig {
 
     private:
 
+#pragma warning(push)
+#pragma warning(disable: 4251)
         StringType name;
+#pragma warning(pop)
         Offset offset;
         Size size;
         StereoChannel stereoChannel;

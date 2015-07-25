@@ -68,7 +68,10 @@ namespace VvandConfig {
     private:
 
         MachineCollectionType machines;
+#pragma warning(push)
+#pragma warning(disable: 4251)
         StringType name;
+#pragma warning(pop)
         Size size;
 
         friend class VvandConfigParser;

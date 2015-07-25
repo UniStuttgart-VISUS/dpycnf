@@ -41,7 +41,10 @@ namespace VvandConfig {
 
     private:
 
+#pragma warning(push)
+#pragma warning(disable: 4251)
         StringType identity;
+#pragma warning(pop)
         TileCollectionType tiles;
 
         friend class VvandConfigParser;
