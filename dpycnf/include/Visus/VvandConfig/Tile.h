@@ -15,9 +15,6 @@
 #include "Visus/StereoChannel.h"
 
 
-// Make instantiation available in DLL interface.
-template class DPYCNF_API std::basic_string<wchar_t>;
-
 
 namespace Visus {
 namespace VvandConfig {

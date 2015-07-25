@@ -9,7 +9,7 @@
 #include "XmlException.h"
 
 #ifdef XML_UNICODE
-#define _X(s) L#s
+#define _X(s) L##s
 #else /* XML_UNICODE */
 #define _X(s) s
 #endif /* XML_UNICODE */
@@ -47,9 +47,8 @@ Visus::VvandConfig::VvandConfigParser::~VvandConfigParser(void) { }
  */
 Visus::VvandConfig::DisplayConfiguration
 Visus::VvandConfig::VvandConfigParser::Parse(const StringType& path) {
-    Visus::VvandConfig::DisplayConfiguration retval;
     Base::Parse(path);
-    return retval;
+    return this->currentConfig;
 }
 
 

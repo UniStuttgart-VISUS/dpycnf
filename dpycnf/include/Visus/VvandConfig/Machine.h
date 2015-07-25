@@ -8,8 +8,10 @@
 #include "Visus/VvandConfig/Tile.h"
 
 
+#ifndef DPYCNF_STATIC
 // Make instantiation available in DLL interface.
 template class DPYCNF_API std::vector<Visus::VvandConfig::Tile>;
+#endif /* !DPYCNF_STATIC */
 
 
 namespace Visus {

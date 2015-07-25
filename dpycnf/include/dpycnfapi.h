@@ -5,8 +5,16 @@
 
 #pragma once
 
+#ifndef DPYCNF_STATIC
+
 #ifdef DPYCNF_EXPORTS
 #define DPYCNF_API __declspec(dllexport)
-#else
+#else /* DPYCNF_EXPORTS */
 #define DPYCNF_API __declspec(dllimport)
-#endif
+#endif /* DPYCNF_EXPORTS */
+
+#else /* DPYCNF_STATIC */
+
+#define DPYCNF_API
+
+#endif /* DPYCNF_STATIC */

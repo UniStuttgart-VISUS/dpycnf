@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "msvc2012", "expat\msvc2013\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dpycnf", "dpycnf\dpycnf.vcxproj", "{BB85D696-9F12-4BB8-9040-D33B9C3742F7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{189A2D9F-5049-49DC-AD04-65B275E248FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (static)|Win32 = Debug (static)|Win32
@@ -51,6 +53,22 @@ Global
 		{BB85D696-9F12-4BB8-9040-D33B9C3742F7}.Release|Win32.Build.0 = Release|Win32
 		{BB85D696-9F12-4BB8-9040-D33B9C3742F7}.Release|x64.ActiveCfg = Release|x64
 		{BB85D696-9F12-4BB8-9040-D33B9C3742F7}.Release|x64.Build.0 = Release|x64
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Debug (static)|Win32.ActiveCfg = Debug|Win32
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Debug (static)|Win32.Build.0 = Debug|Win32
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Debug (static)|x64.ActiveCfg = Debug|x64
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Debug (static)|x64.Build.0 = Debug|x64
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Debug|Win32.Build.0 = Debug|Win32
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Debug|x64.ActiveCfg = Debug|x64
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Debug|x64.Build.0 = Debug|x64
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Release (static)|Win32.ActiveCfg = Release|Win32
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Release (static)|Win32.Build.0 = Release|Win32
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Release (static)|x64.ActiveCfg = Release|x64
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Release (static)|x64.Build.0 = Release|x64
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Release|Win32.ActiveCfg = Release|Win32
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Release|Win32.Build.0 = Release|Win32
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Release|x64.ActiveCfg = Release|x64
+		{189A2D9F-5049-49DC-AD04-65B275E248FF}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,8 +8,10 @@
 
 #include "Visus/VvandConfig/Machine.h"
 
+#ifndef DPYCNF_STATIC
 // Make instantiation available in DLL interface.
 template class DPYCNF_API std::vector<Visus::VvandConfig::Machine>;
+#endif /* !DPYCNF_STATIC */
 
 
 namespace Visus {
@@ -24,6 +26,16 @@ namespace VvandConfig {
 
         typedef std::basic_string<wchar_t> StringType;
         typedef std::vector<Machine> MachineCollectionType;
+
+        /// <summary>
+        /// Parses the display configuration from the given file.
+        /// </summary>
+        /// <param name="path">The path to an XML file.</param>
+        /// <exception cref="std::system_error">If an I/O error occurred while
+        /// reading the input file.</exception>
+        /// <exception cref="XmlException">If an XML syntax error was found in
+        /// the file.</exception>
+        static DisplayConfiguration Parse(const StringType& path);
 
         /// <summary>
         /// Gets an iterator for the begin of the machine list.

@@ -57,7 +57,7 @@ void SaxParser::Parse(const StringType& path) {
     // TODO: only works with unicode build
     auto hFile = ::CreateFile(path.c_str(), GENERIC_READ, FILE_SHARE_READ,
         nullptr, OPEN_EXISTING, 0, NULL);
-    if (hFile == NULL) {
+    if (hFile == INVALID_HANDLE_VALUE) {
         auto e = ::GetLastError();
         auto ec = std::error_code(e, std::system_category());
         throw std::system_error(ec);
