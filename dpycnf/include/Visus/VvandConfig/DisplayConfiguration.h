@@ -28,6 +28,72 @@ namespace VvandConfig {
         typedef std::vector<Machine> MachineCollectionType;
 
         /// <summary>
+        /// An iterator which enables iterating all tiles of the tiled display
+        /// regardless of the machine that is driving it.
+        /// </summary>
+        class DPYCNF_API RecursiveTileIterator : public std::iterator<
+                std::forward_iterator_tag, const Tile> {
+
+        public:
+
+            /// <summary>
+            /// Pre-increment.
+            /// </summary>
+            RecursiveTileIterator& operator ++(void);
+
+            /// <summary>
+            /// Post-increment.
+            /// </summary>
+            inline RecursiveTileIterator operator ++(int) {
+                auto retval = *this;
+                ++(*this);
+                return retval;
+            }
+
+            /// <summary>
+            /// Test for equality.
+            /// </summary>
+            inline bool operator ==(const RecursiveTileIterator& rhs) const {
+                return ((this->mit == rhs.mit) && (this->tit == rhs.tit));
+            }
+
+            /// <summary>
+            /// Test for inequality.
+            /// </summary>
+            inline bool operator !=(const RecursiveTileIterator& rhs) const {
+                return !(*this == rhs);
+            }
+
+            /// <summary>
+            /// Dereference.
+            /// </summary>
+            inline reference operator *(void) const {
+                return this->tit.operator *();
+            }
+
+            /// <summary>
+            /// Element access.
+            /// </summary>
+            inline pointer operator ->(void) const {
+                return this->tit.operator ->();
+            }
+
+        private:
+
+            typedef MachineCollectionType::const_iterator MachineIterator;
+            typedef Machine::TileCollectionType::const_iterator TileIterator;
+
+            RecursiveTileIterator(const MachineCollectionType& machines,
+                const bool isBegin);
+
+            const MachineCollectionType& machines;
+            MachineIterator mit;
+            TileIterator tit;
+
+            friend class DisplayConfiguration;
+        };
+
+        /// <summary>
         /// Parses the display configuration from the given file.
         /// </summary>
         /// <param name="path">The path to an XML file.</param>
@@ -63,6 +129,20 @@ namespace VvandConfig {
         /// </summary>
         const Size& GetSize(void) const {
             return this->size;
+        }
+
+        /// <summary>
+        /// Gets an iterator that enumerates all tiles on all machines.
+        /// </summary>
+        RecursiveTileIterator GetTilesBegin(void) const {
+            return RecursiveTileIterator(this->machines, true);
+        }
+
+        /// <summary>
+        /// Gets the end of the all-tile enumeration.
+        /// </summary>
+        RecursiveTileIterator GetTilesEnd(void) const {
+            return RecursiveTileIterator(this->machines, false);
         }
 
     private:
