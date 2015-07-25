@@ -87,8 +87,11 @@ namespace VvandConfig {
                 const bool isBegin);
 
             const MachineCollectionType& machines;
+#pragma warning(push)
+#pragma warning(disable: 4251)
             MachineIterator mit;
             TileIterator tit;
+#pragma warning(pop)
 
             friend class DisplayConfiguration;
         };
