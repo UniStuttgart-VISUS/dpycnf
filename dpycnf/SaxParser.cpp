@@ -65,8 +65,8 @@ void SaxParser::Parse(const StringType& path) {
 
     /* Parse the file incrementally. */
     do {
-        if (!::ReadFile(hFile, this->buffer.data(), this->buffer.size(),
-                &bytesRead, nullptr)) {
+        if (!::ReadFile(hFile, this->buffer.data(),
+                static_cast<DWORD>(this->buffer.size()), &bytesRead, nullptr)) {
             auto e = ::GetLastError();
             auto ec = std::error_code(e, std::system_category());
             throw std::system_error(ec);

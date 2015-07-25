@@ -28,11 +28,10 @@ XmlException::XmlException(const XML_Error errorCode,
 /*
  * XmlException::XmlException
  */
-//XmlException::XmlException(const char *customMsg, const XML_Size xmlLine,
-//        const XML_Size xmlColumn, const char *file, const int line)
-//        : Base(customMsg), errorCode(0) {
-//    THE_STACK_TRACE;
-//}
+XmlException::XmlException(const XML_Char *customMsg, const XML_Size xmlLine,
+        const XML_Size xmlColumn, const char *file, const int line)
+    : Base(toString(customMsg).c_str()), errorCode(XML_ERROR_NONE), file(file),
+        line(line), xmlColumn(xmlColumn), xmlLine(xmlLine) { }
 
 
 /*
@@ -44,14 +43,13 @@ XmlException::~XmlException(void) { }
 /*
  * XmlException::toString
  */
-std::string XmlException::toString(const XML_Error errorCode) {
-    auto str = ::XML_ErrorString(errorCode);
+std::string XmlException::toString(const XML_Char *errorMsg) {
 #ifdef XML_UNICODE
     typedef std::codecvt_utf8<XML_Char> ConverterType;
     typedef std::basic_string<XML_Char> StringType;
     std::wstring_convert<ConverterType, XML_Char> converter;
-    return converter.to_bytes(StringType(str));
+    return converter.to_bytes(StringType(errorMsg));
 #else /* XML_UNICODE */
-    return str;
+    return errorMsg;
 #endif /* XML_UNICODE */
 }

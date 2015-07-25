@@ -40,8 +40,8 @@ public:
     /// <summary>
     /// Create a new exception with a custom error message.
     /// </summary>
-    //XmlException(const char *customMsg, const XML_Size xmlLine,
-    //    const XML_Size xmlColumn, const char *file, const int line);
+    XmlException(const XML_Char *customMsg, const XML_Size xmlLine,
+        const XML_Size xmlColumn, const char *file, const int line);
 
     /// <summary>
     /// Dtor.
@@ -94,7 +94,14 @@ private:
     /// <summary>
     /// Gets a string description for an Expat error code.
     /// </summary>
-    static std::string toString(const XML_Error errorCode);
+    static inline std::string toString(const XML_Error errorCode) {
+        return XmlException::toString(::XML_ErrorString(errorCode));
+    }
+
+    /// <summary>
+    /// Gets an std::string for an Expat string.
+    /// </summary>
+    static std::string toString(const XML_Char *errorMsg);
 
     /// <summary>
     /// The XML error code.

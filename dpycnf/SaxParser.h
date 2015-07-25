@@ -63,23 +63,14 @@ public:
     /// </summary>
     virtual ~SaxParser(void);
 
-    /**
-     * Parse XML from the open file 'file'. The parser starts at the current
-     * position in the file. The file must be open. The parser will parse
-     * until the end of the file was reached. The parser will NOT close the
-     * file afterwards.
-     *
-     * @param file An open file.
-     *
-     * @throws vislib::IllegalStateException If the parser has been created
-     *                                       without a read buffer, i. e.
-     *                                       ('bufferSize' == 0).
-     * @throws vislib::sys::SystemException  If reading from 'file' failed.
-     * @throws XmlException                  If an XML syntax error was found.
-     */
-
     /// <summary>
+    /// Parse XML from the open file <paramref name="file" />.
     /// </summary>
+    /// <param name="path">The path to an XML file.</param>
+    /// <exception cref="std::system_error">If an I/O error occurred while
+    /// reading the input file.</exception>
+    /// <exception cref="XmlException">If an XML syntax error was found in
+    /// the file.</exception>
     void Parse(const StringType& path);
 
 protected:
@@ -176,6 +167,8 @@ private:
             const XML_Char *name, const XML_Char **atts) {
         static_cast<SaxParser *>(userData)->OnStartElement(name, atts);
     }
+
+    SaxParser(const SaxParser& rhs);
 
     /// <summary>
     /// Input buffer for parsing from a file.
