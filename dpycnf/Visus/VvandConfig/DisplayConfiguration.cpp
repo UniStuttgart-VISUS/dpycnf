@@ -6,6 +6,8 @@
 #include "stdafx.h"
 #include "Visus/VvandConfig/DisplayConfiguration.h"
 
+#include <algorithm>
+
 #include "../../VvandConfigParser.h"
 
 
@@ -38,8 +40,6 @@ Visus::VvandConfig::DisplayConfiguration::RecursiveTileIterator::RecursiveTileIt
 }
 
 
-
-
 /*
  * Visus::VvandConfig::DisplayConfiguration::Parse
  */
@@ -47,4 +47,28 @@ Visus::VvandConfig::DisplayConfiguration
 Visus::VvandConfig::DisplayConfiguration::Parse(const StringType& path) {
     VvandConfigParser parser;
     return parser.Parse(path);
+}
+
+
+/*
+ * Visus::VvandConfig::DisplayConfiguration::FindMachine
+ */
+Visus::VvandConfig::DisplayConfiguration::MachineCollectionType::const_iterator
+Visus::VvandConfig::DisplayConfiguration::FindMachine(
+        const StringType& identity, const bool caseSensitive) {
+    StringType l;
+    if (caseSensitive) {
+        l = identity;
+    } else {
+        std::transform(identity.begin(), identity.end(), l.begin(), ::tolower);
+    }
+
+    return std::find_if(this->machines.cbegin(), this->machines.cend(),
+            [&](const Machine& m) -> bool {
+        StringType r = m.GetIdentity();
+        if (!caseSensitive) {
+            std::transform(r.begin(), r.end(), r.begin(), ::tolower);
+        }
+        return (l == r);
+    });
 }

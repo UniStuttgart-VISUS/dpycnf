@@ -107,6 +107,12 @@ namespace VvandConfig {
         static DisplayConfiguration Parse(const StringType& path);
 
         /// <summary>
+        /// Searches a machine by its identity string.
+        /// </summary>
+        MachineCollectionType::const_iterator FindMachine(
+            const StringType& identity, const bool caseSensitive = false);
+
+        /// <summary>
         /// Gets an iterator for the begin of the machine list.
         /// </summary>
         MachineCollectionType::const_iterator GetMachinesBegin(void) const {
