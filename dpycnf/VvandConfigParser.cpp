@@ -43,11 +43,21 @@ Visus::VvandConfig::VvandConfigParser::~VvandConfigParser(void) { }
 
 
 /*
- * Visus::VvandConfig::VvandConfigParser::Parse
+ * Visus::VvandConfig::VvandConfigParser::ParseFile
  */
 Visus::VvandConfig::DisplayConfiguration
-Visus::VvandConfig::VvandConfigParser::Parse(const StringType& path) {
-    Base::Parse(path);
+Visus::VvandConfig::VvandConfigParser::ParseFile(const StringType& path) {
+    Base::ParseFile(path);
+    return this->currentConfig;
+}
+
+
+/*
+ * Visus::VvandConfig::VvandConfigParser::ParseText
+ */
+Visus::VvandConfig::DisplayConfiguration
+Visus::VvandConfig::VvandConfigParser::ParseText(const StringType& text) {
+    Base::ParseText(text);
     return this->currentConfig;
 }
 

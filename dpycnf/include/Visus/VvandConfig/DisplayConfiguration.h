@@ -104,7 +104,15 @@ namespace VvandConfig {
         /// reading the input file.</exception>
         /// <exception cref="XmlException">If an XML syntax error was found in
         /// the file.</exception>
-        static DisplayConfiguration Parse(const StringType& path);
+        static DisplayConfiguration Load(const StringType& path);
+
+        /// <summary>
+        /// Parses the display configuration from the given text.
+        /// </summary>
+        /// <param name="text">The XML text of the configuration.</param>
+        /// <exception cref="XmlException">If an XML syntax error was found in
+        /// the file.</exception>
+        static DisplayConfiguration Parse(const StringType& text);
 
         /// <summary>
         /// Searches a machine by its identity string.

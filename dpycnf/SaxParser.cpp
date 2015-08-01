@@ -44,9 +44,9 @@ SaxParser::~SaxParser(void) {
 
 
 /*
- * SaxParser::Parse
+ * SaxParser::ParseFile
  */
-void SaxParser::Parse(const StringType& path) {
+void SaxParser::ParseFile(const StringType& path) {
     DWORD bytesRead = 0;
 
     /* Sanity checks. */
@@ -80,6 +80,22 @@ void SaxParser::Parse(const StringType& path) {
                 __FILE__, __LINE__);
         }
     } while (bytesRead != 0);
+}
+
+
+/*
+ * SaxParser::ParseText
+ */
+void SaxParser::ParseText(const StringType& text) {
+    auto status = ::XML_Parse(this->parser,
+        reinterpret_cast<const char *>(text.c_str()),
+        static_cast<int>(text.size() * sizeof(XML_Char)), 1);
+    if (status == XML_STATUS_ERROR) {
+        throw XmlException(::XML_GetErrorCode(this->parser),
+            ::XML_GetErrorLineNumber(this->parser),
+            ::XML_GetErrorColumnNumber(this->parser),
+            __FILE__, __LINE__);
+    }
 }
 
 

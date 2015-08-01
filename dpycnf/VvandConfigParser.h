@@ -26,7 +26,9 @@ namespace VvandConfig {
 
         virtual ~VvandConfigParser(void);
 
-        Visus::VvandConfig::DisplayConfiguration Parse(const StringType& path);
+        Visus::VvandConfig::DisplayConfiguration ParseFile(const StringType& path);
+
+        Visus::VvandConfig::DisplayConfiguration ParseText(const StringType& path);
 
     protected:
 

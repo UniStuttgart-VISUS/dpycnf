@@ -41,13 +41,24 @@ Visus::VvandConfig::DisplayConfiguration::RecursiveTileIterator::RecursiveTileIt
 
 
 /*
+ * Visus::VvandConfig::DisplayConfiguration::Load
+ */
+Visus::VvandConfig::DisplayConfiguration
+Visus::VvandConfig::DisplayConfiguration::Load(const StringType& path) {
+    VvandConfigParser parser;
+    return parser.ParseFile(path);
+}
+
+
+/*
  * Visus::VvandConfig::DisplayConfiguration::Parse
  */
 Visus::VvandConfig::DisplayConfiguration
-Visus::VvandConfig::DisplayConfiguration::Parse(const StringType& path) {
+Visus::VvandConfig::DisplayConfiguration::Parse(const StringType& text) {
     VvandConfigParser parser;
-    return parser.Parse(path);
+    return parser.ParseText(text);
 }
+
 
 
 /*

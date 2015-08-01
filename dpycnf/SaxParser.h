@@ -64,14 +64,22 @@ public:
     virtual ~SaxParser(void);
 
     /// <summary>
-    /// Parse XML from the open file <paramref name="file" />.
+    /// Parse XML from the file <paramref name="file" />.
     /// </summary>
     /// <param name="path">The path to an XML file.</param>
     /// <exception cref="std::system_error">If an I/O error occurred while
     /// reading the input file.</exception>
     /// <exception cref="XmlException">If an XML syntax error was found in
     /// the file.</exception>
-    void Parse(const StringType& path);
+    void ParseFile(const StringType& path);
+
+    /// <summary>
+    /// Parse XML text <paramref name="text" />.
+    /// </summary>
+    /// <param name="text">The XML text to be parsed.</param>
+    /// <exception cref="XmlException">If an XML syntax error was found in
+    /// the file.</exception>
+    void ParseText(const StringType& text);
 
 protected:
 
