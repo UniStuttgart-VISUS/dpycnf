@@ -6,8 +6,6 @@
 #include "stdafx.h"
 #include "Visus/VvandConfig/DisplayConfiguration.h"
 
-#include <algorithm>
-
 #include "../../VvandConfigParser.h"
 
 
@@ -83,3 +81,93 @@ Visus::VvandConfig::DisplayConfiguration::FindMachine(
         return (l == r);
     });
 }
+
+
+/*
+ * Visus::VvandConfig::DisplayConfiguration::ToString
+ */
+Visus::VvandConfig::DisplayConfiguration::StringType
+Visus::VvandConfig::DisplayConfiguration::ToString(void) const {
+    std::basic_ostringstream<TCHAR> retval;
+    retval << _T("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+    retval << _T("<TiledDisplay ")
+        _T("xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" ")
+        _T("xmlns=\"http://www.visus.uni-stuttgart.de/vvand/2012/description\">");
+
+    retval << _T("<Machines>");
+    for (auto& m : this->machines) {
+        retval << _T("<Machine>");
+
+        retval << _T("<Identity>");
+        retval << m.GetIdentity();
+        retval << _T("</Identity>");
+
+        retval << _T("<Tiles>");
+        for (auto t = m.GetTilesBegin(); t != m.GetTilesEnd(); ++t) {
+            retval << _T("<LeftOffset>");
+            retval << t->GetOffset().Left;
+            retval << _T("</LeftOffset>");
+
+            retval << _T("<Name>");
+            retval << t->GetName();
+            retval << _T("</Name>");
+
+            retval << _T("<StereoChannel>");
+            switch (t->GetStereoChannel()) {
+                case StereoChannel::RIGHT:
+                    retval << _T("Right");
+                    break;
+
+                default:
+                    retval << _T("Left");
+                    break;
+            }
+             retval << _T("</StereoChannel>");
+
+            retval << _T("<TopOffset>");
+            retval << t->GetOffset().Top;
+            retval << _T("</TopOffset>");
+
+            retval << _T("<WindowHeight>");
+            retval << t->GetSize().Height;
+            retval << _T("</WindowHeight>");
+
+            retval << _T("<WindowWidth>");
+            retval << t->GetSize().Width;
+            retval << _T("</WindowWidth>");
+        }
+        retval << _T("</Tiles>");
+
+        retval << _T("</Machine>");
+    }
+    retval << _T("</Machines>");
+
+    retval << _T("<Name>");
+    retval << this->name;
+    retval << _T("</Name>");
+
+    retval << _T("<Width>");
+    retval << this->size.Width;
+    retval << _T("</Width>");
+
+    retval << _T("<Height>");
+    retval << this->size.Height;
+    retval << _T("</Height>");
+
+    retval << _T("</TiledDisplay>");
+
+    return retval.str();
+}
+/*
+
+<TiledDisplay xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.visus.uni-stuttgart.de/vvand/2012/description">
+  <Machines>
+    <Machine>
+      <Identity>keshiki01</Identity>
+      <Tiles>
+        <Tile>
+
+        </Tile>
+      </Tiles>
+    </Machine>
+*/

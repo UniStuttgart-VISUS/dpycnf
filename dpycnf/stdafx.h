@@ -14,4 +14,7 @@
 #include <algorithm>
 #include <cassert>
 #include <string>
+#include <sstream>
 #include <vector>
+
+#include <tchar.h>

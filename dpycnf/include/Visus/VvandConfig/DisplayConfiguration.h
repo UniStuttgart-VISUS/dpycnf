@@ -162,6 +162,11 @@ namespace VvandConfig {
             return RecursiveTileIterator(this->machines, false);
         }
 
+        /// <summary>
+        /// Answer the XML string representation of the configuration.
+        /// </summary>
+        StringType ToString(void) const;
+
     private:
 
         MachineCollectionType machines;
