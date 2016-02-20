@@ -104,6 +104,57 @@ Visus::VvandConfig::DisplayConfiguration::FindMachine(
 
 
 /*
+ * Visus::VvandConfig::DisplayConfiguration::GetRange
+ */
+bool Visus::VvandConfig::DisplayConfiguration::GetRange(
+        Offset& outBegin, Offset& outEnd) const {
+    typedef std::numeric_limits<Offset::OffsetType> OffsetLimits;
+#ifdef _MSC_VER
+#pragma push_macro("max")
+#undef max
+#pragma push_macro("min")
+#undef min
+#endif /* _MSC_VER */
+    Offset::OffsetType minX = OffsetLimits::max();
+    Offset::OffsetType minY = OffsetLimits::max();
+    Offset::OffsetType maxX = OffsetLimits::min();
+    Offset::OffsetType maxY = OffsetLimits::min();
+#ifdef _MSC_VER
+#pragma pop_macro("max")
+#pragma pop_macro("min")
+#endif /* _MSC_VER */
+    bool retval = false;
+
+    for (auto it = this->GetTilesBegin(); it != this->GetTilesEnd(); ++it) {
+        retval = true;
+        auto o = it->GetOffset();
+        auto s = it->GetSize();
+        if (o.Left < minX) {
+            minX = o.Left;
+        }
+        if (o.Top < minY) {
+            minY = o.Top;
+        }
+        if (o.Left + s.Width > maxX) {
+            maxX = o.Left + s.Width;
+        }
+        if (o.Top + s.Height > maxY) {
+            maxY = o.Top + s.Height;
+        }
+    }
+
+    if (retval) {
+        outBegin.Left = minX;
+        outBegin.Top = minY;
+        outEnd.Left = maxX;
+        outEnd.Top = maxY;
+    }
+
+    return retval;
+}
+
+
+/*
  * Visus::VvandConfig::DisplayConfiguration::ToString
  */
 Visus::VvandConfig::DisplayConfiguration::StringType

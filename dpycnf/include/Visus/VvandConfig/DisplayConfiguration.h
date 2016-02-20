@@ -140,6 +140,11 @@ namespace VvandConfig {
         }
 
         /// <summary>
+        /// Gets the bounding box of all tiles of the tiled display.
+        /// </summary>
+        bool GetRange(Offset& outBegin, Offset& outEnd) const;
+
+        /// <summary>
         /// Gets the overall size of the tiled display.
         /// </summary>
         const Size& GetSize(void) const {

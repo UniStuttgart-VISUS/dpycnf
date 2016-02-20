@@ -129,15 +129,17 @@ void Visus::VvandConfig::VvandConfigParser::OnEndElement(
     } else if (SaxParser::AreStringsEqual(name, TAG_LEFTOFFSET, false)) {
         if (this->currentScope == Scope::TILE) {
             int tmp = std::stoi(this->cdata);
-            this->currentTile.offset.Left = std::min<int>(tmp,
-                this->currentTile.offset.Left);
+            //this->currentTile.offset.Left = std::min<int>(tmp,
+            //    this->currentTile.offset.Left);
+            this->currentTile.offset.Left = tmp;
         }
 
     } else if (SaxParser::AreStringsEqual(name, TAG_TOPOFFSET, false)) {
         if (this->currentScope == Scope::TILE) {
             int tmp = std::stoi(this->cdata);
-            this->currentTile.offset.Top = std::min<int>(tmp, 
-                this->currentTile.offset.Top);
+            //this->currentTile.offset.Top = std::min<int>(tmp, 
+            //    this->currentTile.offset.Top);
+            this->currentTile.offset.Top = tmp;
         }
 
     } else if (SaxParser::AreStringsEqual(name, TAG_WINDOWWIDTH, false)) {
