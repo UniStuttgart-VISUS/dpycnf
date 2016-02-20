@@ -14,14 +14,32 @@
  */
 Visus::VvandConfig::DisplayConfiguration::RecursiveTileIterator&
 Visus::VvandConfig::DisplayConfiguration::RecursiveTileIterator::operator ++(void) {
-    if (this->mit != this->machines.end()) {
+    if (this->mit != this->machines.cend()) {
         if (++this->tit == this->mit->GetTilesEnd()) {
-            if (++this->mit != this->machines.end()) {
+            if (++this->mit != this->machines.cend()) {
                 this->tit = this->mit->GetTilesBegin();
             }
         }
     }
     return *this;
+}
+
+
+/*
+ * Visus::VvandConfig::DisplayConfiguration::RecursiveTileIterator::operator ==
+ */
+bool Visus::VvandConfig::DisplayConfiguration::RecursiveTileIterator::operator ==(
+        const RecursiveTileIterator& rhs) const {
+    if (this->mit == rhs.mit) {
+        if (this->mit != this->machines.cend()) {
+            return (this->tit == rhs.tit);
+        } else {
+            return true;
+        }
+
+    } else {
+        return false;
+    }
 }
 
 
@@ -32,9 +50,11 @@ Visus::VvandConfig::DisplayConfiguration::RecursiveTileIterator::RecursiveTileIt
         const MachineCollectionType& machines, const bool isBegin) 
         : machines(machines) {
     this->mit = isBegin ? machines.cbegin() : machines.cend();
-    this->tit = isBegin
-        ? machines.front().GetTilesBegin()
-        : machines.back().GetTilesEnd();
+    if (this->mit != machines.cend()) {
+        this->tit = isBegin
+            ? machines.front().GetTilesBegin()
+            : machines.back().GetTilesEnd();
+    }
 }
 
 

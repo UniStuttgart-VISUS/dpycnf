@@ -53,9 +53,7 @@ namespace VvandConfig {
             /// <summary>
             /// Test for equality.
             /// </summary>
-            inline bool operator ==(const RecursiveTileIterator& rhs) const {
-                return ((this->mit == rhs.mit) && (this->tit == rhs.tit));
-            }
+            bool operator ==(const RecursiveTileIterator& rhs) const;
 
             /// <summary>
             /// Test for inequality.
