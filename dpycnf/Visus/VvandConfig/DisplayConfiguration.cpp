@@ -89,14 +89,16 @@ Visus::VvandConfig::DisplayConfiguration::FindMachine(
     if (caseSensitive) {
         l = identity;
     } else {
-        std::transform(identity.begin(), identity.end(), l.begin(), ::tolower);
+        std::transform(identity.begin(), identity.end(),
+            std::back_inserter(l), ::tolower);
     }
 
     return std::find_if(this->machines.cbegin(), this->machines.cend(),
             [&](const Machine& m) -> bool {
         StringType r = m.GetIdentity();
         if (!caseSensitive) {
-            std::transform(r.begin(), r.end(), r.begin(), ::tolower);
+            std::transform(r.begin(), r.end(),
+                std::back_inserter(r), ::tolower);
         }
         return (l == r);
     });
