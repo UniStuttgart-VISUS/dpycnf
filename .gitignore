@@ -3,3 +3,13 @@
 ################################################################################
 
 /.vs/dpycnf/v15
+/dpycnf/Win32
+/dpycnf/x64
+/test/Win32
+/test/x64
+/packages
+/dpycnf.sdf
+*.suo
+/Win32
+/x64
+*.user
