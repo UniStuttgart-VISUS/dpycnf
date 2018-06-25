@@ -111,20 +111,10 @@ Visus::VvandConfig::DisplayConfiguration::FindMachine(
 bool Visus::VvandConfig::DisplayConfiguration::GetRange(
         Offset& outBegin, Offset& outEnd) const {
     typedef std::numeric_limits<Offset::OffsetType> OffsetLimits;
-#ifdef _MSC_VER
-#pragma push_macro("max")
-#undef max
-#pragma push_macro("min")
-#undef min
-#endif /* _MSC_VER */
-    Offset::OffsetType minX = OffsetLimits::max();
-    Offset::OffsetType minY = OffsetLimits::max();
-    Offset::OffsetType maxX = OffsetLimits::min();
-    Offset::OffsetType maxY = OffsetLimits::min();
-#ifdef _MSC_VER
-#pragma pop_macro("max")
-#pragma pop_macro("min")
-#endif /* _MSC_VER */
+    Offset::OffsetType minX = (OffsetLimits::max)();
+    Offset::OffsetType minY = (OffsetLimits::max)();
+    Offset::OffsetType maxX = (OffsetLimits::lowest)();
+    Offset::OffsetType maxY = (OffsetLimits::lowest)();
     bool retval = false;
 
     for (auto it = this->GetTilesBegin(); it != this->GetTilesEnd(); ++it) {
