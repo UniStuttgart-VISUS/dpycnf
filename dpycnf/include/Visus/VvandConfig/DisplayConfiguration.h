@@ -116,7 +116,12 @@ namespace VvandConfig {
         /// Searches a machine by its identity string.
         /// </summary>
         MachineCollectionType::const_iterator FindMachine(
-            const StringType& identity, const bool caseSensitive = false);
+            const StringType& identity, const bool caseSensitive = false) const;
+
+        /// <summary>
+        /// Searches the machine the process is running on by its name,
+        /// </summary>
+        MachineCollectionType::const_iterator FindMachine(void) const;
 
         /// <summary>
         /// Gets an iterator for the begin of the machine list.

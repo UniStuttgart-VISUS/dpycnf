@@ -84,7 +84,7 @@ Visus::VvandConfig::DisplayConfiguration::Parse(const StringType& text) {
  */
 Visus::VvandConfig::DisplayConfiguration::MachineCollectionType::const_iterator
 Visus::VvandConfig::DisplayConfiguration::FindMachine(
-        const StringType& identity, const bool caseSensitive) {
+        const StringType& identity, const bool caseSensitive) const {
     StringType l;
     if (caseSensitive) {
         l = identity;
@@ -102,6 +102,23 @@ Visus::VvandConfig::DisplayConfiguration::FindMachine(
         }
         return (l == r);
     });
+}
+
+
+/*
+ * Visus::VvandConfig::DisplayConfiguration::FindMachine
+ */
+Visus::VvandConfig::DisplayConfiguration::MachineCollectionType::const_iterator
+Visus::VvandConfig::DisplayConfiguration::FindMachine(void) const {
+    StringType::value_type name[MAX_COMPUTERNAME_LENGTH + 1];
+    auto size = static_cast<DWORD>(std::size(name));
+
+    ::ZeroMemory(name, sizeof(name));
+    if (::GetComputerNameW(name, &size)) {
+        throw std::system_error(::GetLastError(), std::system_category());
+    }
+
+    return this->FindMachine(name, false);
 }
 
 
