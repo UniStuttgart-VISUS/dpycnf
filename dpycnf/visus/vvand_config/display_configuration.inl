@@ -1,20 +1,20 @@
-#include "display_configuration.h"
 /// <copyright file="display_configuration.inl" company="Visualisierungsinstitut der Universität Stuttgart">
 /// Copyright © 2015 - 2018 Christoph Müller. Alle Rechte vorbehalten.
 /// </copyright>
 /// <author>Christoph Müller</author>
 
 
-#if 0
 /*
- * ...RecursiveTileIterator::operator +
+ * ...recursive_tile_iterator::operator ++
  */
-visus::vvand_config::display_configuration<T>::RecursiveTileIterator&
-visus::vvand_config::display_configuration<T>::RecursiveTileIterator::operator ++(void) {
+template<class T>
+typename visus::vvand_config::display_configuration<T>::recursive_tile_iterator&
+visus::vvand_config::display_configuration<T>::recursive_tile_iterator::operator ++(
+        void) {
     if (this->mit != this->machines.cend()) {
-        if (++this->tit == this->mit->GetTilesEnd()) {
+        if (++this->tit == this->mit->end()) {
             if (++this->mit != this->machines.cend()) {
-                this->tit = this->mit->GetTilesBegin();
+                this->tit = this->mit->begin();
             }
         }
     }
@@ -23,10 +23,11 @@ visus::vvand_config::display_configuration<T>::RecursiveTileIterator::operator +
 
 
 /*
- * visus::vvand_config::display_configuration<T>::RecursiveTileIterator::operator ==
+ * ...::recursive_tile_iterator::operator ==
  */
-bool visus::vvand_config::display_configuration<T>::RecursiveTileIterator::operator ==(
-        const RecursiveTileIterator& rhs) const {
+template<class T>
+bool visus::vvand_config::display_configuration<T>::recursive_tile_iterator::operator ==(
+        const recursive_tile_iterator& rhs) const {
     if (this->mit == rhs.mit) {
         if (this->mit != this->machines.cend()) {
             return (this->tit == rhs.tit);
@@ -41,19 +42,19 @@ bool visus::vvand_config::display_configuration<T>::RecursiveTileIterator::opera
 
 
 /*
- * ...::RecursiveTileIterator::RecursiveTileIterator
+ * ...::recursive_tile_iterator::recursive_tile_iterator
  */
-visus::vvand_config::display_configuration<T>::RecursiveTileIterator::RecursiveTileIterator(
-        const MachineCollectionType& machines, const bool isBegin) 
+template<class T>
+visus::vvand_config::display_configuration<T>::recursive_tile_iterator::recursive_tile_iterator(
+        const collection_type& machines, const bool isBegin)
         : machines(machines) {
     this->mit = isBegin ? machines.cbegin() : machines.cend();
     if (this->mit != machines.cend()) {
         this->tit = isBegin
-            ? machines.front().GetTilesBegin()
-            : machines.back().GetTilesEnd();
+            ? machines.front().begin()
+            : machines.back().end();
     }
 }
-#endif
 
 
 /*

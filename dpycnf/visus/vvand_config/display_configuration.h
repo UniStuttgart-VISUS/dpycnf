@@ -6,6 +6,7 @@
 #pragma once
 
 #include <iostream>
+#include <iterator>
 #include <vector>
 
 #include "visus/vvand_config/literal.h"
@@ -48,25 +49,24 @@ namespace vvand_config {
         /// </summary>
         typedef typename machine<T>::tile_type tile_type;
 
-#if false
         /// <summary>
         /// An iterator which enables iterating all tiles of the tiled display
         /// regardless of the machine that is driving it.
         /// </summary>
-        class RecursiveTileIterator : public std::iterator<
-                std::forward_iterator_tag, const Tile> {
+        class recursive_tile_iterator : public std::iterator<
+                std::forward_iterator_tag, const tile_type> {
 
         public:
 
             /// <summary>
             /// Pre-increment.
             /// </summary>
-            RecursiveTileIterator& operator ++(void);
+            recursive_tile_iterator& operator ++(void);
 
             /// <summary>
             /// Post-increment.
             /// </summary>
-            inline RecursiveTileIterator operator ++(int) {
+            inline recursive_tile_iterator operator ++(int) {
                 auto retval = *this;
                 ++(*this);
                 return retval;
@@ -75,12 +75,12 @@ namespace vvand_config {
             /// <summary>
             /// Test for equality.
             /// </summary>
-            bool operator ==(const RecursiveTileIterator& rhs) const;
+            bool operator ==(const recursive_tile_iterator& rhs) const;
 
             /// <summary>
             /// Test for inequality.
             /// </summary>
-            inline bool operator !=(const RecursiveTileIterator& rhs) const {
+            inline bool operator !=(const recursive_tile_iterator& rhs) const {
                 return !(*this == rhs);
             }
 
@@ -100,22 +100,19 @@ namespace vvand_config {
 
         private:
 
-            typedef MachineCollectionType::const_iterator MachineIterator;
-            typedef Machine::TileCollectionType::const_iterator TileIterator;
+            typedef std::vector<machine_type> collection_type;
+            typedef display_configuration::iterator_type machine_iterator;
+            typedef typename machine_type::iterator_type tile_iterator;
 
-            RecursiveTileIterator(const MachineCollectionType& machines,
+            recursive_tile_iterator(const collection_type& machines,
                 const bool isBegin);
 
-            const MachineCollectionType& machines;
-#pragma warning(push)
-#pragma warning(disable: 4251)
-            MachineIterator mit;
-            TileIterator tit;
-#pragma warning(pop)
+            const collection_type& machines;
+            machine_iterator mit;
+            tile_iterator tit;
 
-            friend class DisplayConfiguration;
+            friend class display_configuration;
         };
-#endif 
 
         /// <summary>
         /// Parses the display configuration from the given file.
@@ -179,21 +176,19 @@ namespace vvand_config {
             return this->_size;
         }
 
-#if 0
         /// <summary>
         /// Gets an iterator that enumerates all tiles on all machines.
         /// </summary>
-        RecursiveTileIterator GetTilesBegin(void) const {
-            return RecursiveTileIterator(this->machines, true);
+        recursive_tile_iterator tiles_begin(void) const {
+            return recursive_tile_iterator(this->_machines, true);
         }
 
         /// <summary>
         /// Gets the end of the all-tile enumeration.
         /// </summary>
-        RecursiveTileIterator GetTilesEnd(void) const {
-            return RecursiveTileIterator(this->machines, false);
+        recursive_tile_iterator tiles_end(void) const {
+            return recursive_tile_iterator(this->_machines, false);
         }
-#endif
 
         /// <summary>
         /// Answer the XML string representation of the configuration.
