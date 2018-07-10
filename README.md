@@ -3,7 +3,7 @@ A simple header-only library for XML-based tiled display descriptions used for t
 
 ## Usage
 
-The information from the configuration file is eventually hold in the class `visus::vvand_config::display_configuration`. The class is templated with the XML character type of the underlying Expat parser, which you must provide and link with your application. Therefore, you normally want to instantiate `visus::vvand_config::display_configuration<XML_Char>`.
+The information from the configuration file is eventually held in the class `visus::vvand_config::display_configuration`. The class is templated with the XML character type of the underlying Expat parser, which you must provide and link with your application. Therefore, you normally want to instantiate `visus::vvand_config::display_configuration<XML_Char>`.
 
 The `display_configuration` class supports two modes of obtaining the information: loading from a file and parsing from an in memory string. The former method looks like
 
