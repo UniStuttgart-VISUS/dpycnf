@@ -13,3 +13,8 @@
 /Win32
 /x64
 *.user
+/.vs
+/Debug
+/dpycnf/Debug
+/dpycnf/Release
+/Release

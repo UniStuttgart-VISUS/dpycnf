@@ -7,81 +7,70 @@
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\visus">
+      <UniqueIdentifier>{ccfc931f-098e-4893-a8ce-3c3bd12a17a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\visus\vvand_config">
+      <UniqueIdentifier>{ea80e2a7-eb50-4cf5-9764-726f7bd2228b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="visus\vvand_config\size.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
+    <ClInclude Include="visus\vvand_config\stereo_channel.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
+    <ClInclude Include="visus\vvand_config\tile.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
+    <ClInclude Include="visus\vvand_config\offset.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
+    <ClInclude Include="visus\vvand_config\machine.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
+    <ClInclude Include="visus\vvand_config\xml_exception.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
+    <ClInclude Include="visus\vvand_config\vvand_config_parser.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
+    <ClInclude Include="visus\vvand_config\sax_parser.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
+    <ClInclude Include="dpycnf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="visus\vvand_config\display_configuration.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
     </ClInclude>
-    <ClInclude Include="SaxParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="XmlException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dpycnf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\dpycnfapi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Visus\VvandConfig\DisplayConfiguration.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VvandConfigParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Visus\StereoChannel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Visus\Size.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Visus\Offset.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Visus\VvandConfig\Machine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Visus\VvandConfig\Tile.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="visus\vvand_config\literal.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="XmlException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SaxParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VvandConfigParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visus\VvandConfig\DisplayConfiguration.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visus\VvandConfig\Machine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Visus\VvandConfig\Tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="visus\vvand_config\tile.inl">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </None>
+    <None Include="visus\vvand_config\display_configuration.inl">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </None>
+    <None Include="visus\vvand_config\xml_exception.inl">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </None>
+    <None Include="visus\vvand_config\vvand_config_parser.inl">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </None>
+    <None Include="visus\vvand_config\sax_parser.inl">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
 </Project>
