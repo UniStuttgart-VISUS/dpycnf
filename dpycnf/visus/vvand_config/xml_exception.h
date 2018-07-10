@@ -57,6 +57,38 @@ namespace vvand_config {
         typedef std::basic_string<T> string_type;
 
         /// <summary>
+        /// Gets a string description for an Expat error code.
+        /// </summary>
+        static inline std::string to_string(const error_type errorCode) {
+            return xml_exception::to_string(::XML_ErrorString(errorCode));
+        }
+
+        /// <summary>
+        /// Gets an std::string for an Expat string.
+        /// </summary>
+        template<class Tp>
+        static inline typename std::enable_if<std::is_same<
+            std::string::value_type, Tp>::value, std::string>::type
+        to_string(const Tp *errorMsg) {
+            assert(errorMsg != nullptr);
+            return errorMsg;
+        }
+
+        /// <summary>
+        /// Gets an std::string for an Expat string.
+        /// </summary>
+        template<class Tp>
+        static inline typename std::enable_if<!std::is_same<
+            std::string::value_type, Tp>::value, std::string>::type
+        to_string(const Tp *errorMsg) {
+            typedef std::codecvt_utf8<Tp> c_t;
+            typedef std::basic_string<Tp> s_t;
+            assert(errorMsg != nullptr);
+            std::wstring_convert<c_t, Tp> converter;
+            return converter.to_bytes(s_t(errorMsg));
+        }
+
+        /// <summary>
         /// Create a new exception that represents the Expat error
         /// <paramref name="errorCode" />.
         /// </summary>
@@ -115,38 +147,6 @@ namespace vvand_config {
         /// Base class type.
         /// </summary>
         typedef std::exception base;
-
-        /// <summary>
-        /// Gets a string description for an Expat error code.
-        /// </summary>
-        static inline std::string to_string(const error_type errorCode) {
-            return xml_exception::to_string(::XML_ErrorString(errorCode));
-        }
-
-        /// <summary>
-        /// Gets an std::string for an Expat string.
-        /// </summary>
-        template<class Tp>
-        static inline typename std::enable_if<std::is_same<
-            std::string::value_type, Tp>::value, std::string>::type
-        to_string(const Tp *errorMsg) {
-            assert(errorMsg != nullptr);
-            return errorMsg;
-        }
-
-        /// <summary>
-        /// Gets an std::string for an Expat string.
-        /// </summary>
-        template<class Tp>
-        static inline typename std::enable_if<!std::is_same<
-            std::string::value_type, Tp>::value, std::string>::type
-        to_string(const Tp *errorMsg) {
-            typedef std::codecvt_utf8<Tp> c_t;
-            typedef std::basic_string<Tp> s_t;
-            assert(errorMsg != nullptr);
-            std::wstring_convert<c_t, Tp> converter;
-            return converter.to_bytes(s_t(errorMsg));
-        }
 
         error_type _error_code;
         std::string _file;

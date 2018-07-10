@@ -19,8 +19,8 @@
 
 #include <algorithm>
 #include <cinttypes>
+#include <fstream>
 #include <string>
-#include <system_error>
 #include <vector>
 
 #include <expat.h>
@@ -97,7 +97,7 @@ namespace detail {
         /// Parse XML from the file <paramref name="file" />.
         /// </summary>
         /// <param name="path">The path to an XML file.</param>
-        /// <exception cref="std::system_error">If an I/O error occurred while
+        /// <exception cref="std::ios::failure">If an I/O error occurred while
         /// reading the input file.</exception>
         /// <exception cref="xml_exception">If an XML syntax error was found in
         /// the file.</exception>

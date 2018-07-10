@@ -38,39 +38,32 @@ visus::vvand_config::detail::sax_parser<T>::~sax_parser(void) {
 template<class T>
 void visus::vvand_config::detail::sax_parser<T>::parse_file(
         const string_type& path) {
-    DWORD bytesRead = 0;
+    std::size_t bytesRead = 0;
 
     /* Sanity checks. */
     if (this->buffer.empty()) {
         this->buffer.resize(sax_parser::default_buffer_size);
     }
 
-    // TODO: only works with ASCII build
-    auto hFile = ::CreateFileA(path.c_str(), GENERIC_READ, FILE_SHARE_READ,
-        nullptr, OPEN_EXISTING, 0, NULL);
-    if (hFile == INVALID_HANDLE_VALUE) {
-        auto e = ::GetLastError();
-        auto ec = std::error_code(e, std::system_category());
-        throw std::system_error(ec);
-    }
+    /* Create a stream and make it throw on I/O errors. */
+    std::ifstream stream;
+    stream.exceptions(stream.exceptions() | std::ios::failbit);
+    stream.open(xml_exception<T>::to_string(path.c_str()),
+        std::ifstream::binary);
+    stream.exceptions(stream.exceptions() & ~std::ios::failbit);
 
     /* Parse the file incrementally. */
-    do {
-        if (!::ReadFile(hFile, this->buffer.data(),
-                static_cast<DWORD>(this->buffer.size()), &bytesRead, nullptr)) {
-            auto e = ::GetLastError();
-            auto ec = std::error_code(e, std::system_category());
-            throw std::system_error(ec);
-        }
+    while (!stream.eof()) {
+        stream.read(this->buffer.data(), this->buffer.size());
         auto status = ::XML_Parse(this->parser, buffer.data(),
-            static_cast<int>(bytesRead), (bytesRead == 0));
+            static_cast<int>(stream.gcount()), stream.eof());
         if (status == XML_STATUS_ERROR) {
             throw xml_exception<char_type>(::XML_GetErrorCode(this->parser),
                 ::XML_GetErrorLineNumber(this->parser),
                 ::XML_GetErrorColumnNumber(this->parser),
                 __FILE__, __LINE__);
         }
-    } while (bytesRead != 0);
+    };
 }
 
 
