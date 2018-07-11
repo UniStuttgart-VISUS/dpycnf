@@ -99,8 +99,7 @@ visus::vvand_config::display_configuration<T>::find_machine(
             [&](const machine_type& m) -> bool {
         string_type r = m.identity();
         if (!caseSensitive) {
-            std::transform(r.begin(), r.end(),
-                std::back_inserter(r), ::tolower);
+            std::transform(r.begin(), r.end(), r.begin(), ::tolower);
         }
         return (l == r);
     });
