@@ -22,13 +22,13 @@ namespace detail {
 
     public:
 
-        typedef base::byte_type byte_type;
+        typedef typename base::byte_type byte_type;
         typedef display_configuration<T> configuration_type;
-        typedef base::char_type char_type;
-        typedef base::exception_type exception_type;
+        typedef typename base::char_type char_type;
+        typedef typename base::exception_type exception_type;
         typedef machine<T> machine_type;
-        typedef base::size_type size_type;
-        typedef base::string_type string_type;
+        typedef typename base::size_type size_type;
+        typedef typename base::string_type string_type;
         typedef tile<T> tile_type;
 
         vvand_config_parser(void);

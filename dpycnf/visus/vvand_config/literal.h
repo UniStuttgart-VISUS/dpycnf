@@ -6,6 +6,23 @@
 #pragma once
 
 
+#if defined(XML_UNICODE) && (defined(T2W))
+#define T2XML T2W
+#endif /* defined(XML_UNICODE) && (defined(T2W)) */
+
+#if defined(XML_UNICODE) && (defined(W2T))
+#define XML2T W2T
+#endif /* defined(XML_UNICODE) && (defined(W2T)) */
+
+#if !defined(XML_UNICODE) && (defined(T2A))
+#define T2XML T2A
+#endif /* !defined(XML_UNICODE) && (defined(T2A)) */
+
+#if !defined(XML_UNICODE) && (defined(A2T))
+#define XML2T A2T
+#endif /* !defined(XML_UNICODE) && (defined(A2T)) */
+
+
 namespace visus {
 namespace vvand_config {
 namespace detail {

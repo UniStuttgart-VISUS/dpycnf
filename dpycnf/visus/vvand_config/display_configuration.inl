@@ -140,14 +140,15 @@ bool visus::vvand_config::display_configuration<T>::range(
     auto maxY = (offset_limits::lowest)();
     auto retval = !this->_machines.empty();
 
-    for (auto it = this->begin(), end = this->end(); it != end; ++it) {
+    for (auto it = this->tiles_begin(), end = this->tiles_end(); it != end;
+            ++it) {
         auto o = it->offset();
         auto s = it->size();
         if (o.left < minX) {
-            minX = o.Left;
+            minX = o.left;
         }
         if (o.top < minY) {
-            minY = o.Top;
+            minY = o.top;
         }
         if (o.left + s.width > maxX) {
             maxX = o.left + s.width;

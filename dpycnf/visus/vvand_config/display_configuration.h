@@ -101,7 +101,8 @@ namespace vvand_config {
         private:
 
             typedef std::vector<machine_type> collection_type;
-            typedef display_configuration::iterator_type machine_iterator;
+            typedef typename display_configuration::iterator_type
+                machine_iterator;
             typedef typename machine_type::iterator_type tile_iterator;
 
             recursive_tile_iterator(const collection_type& machines,
