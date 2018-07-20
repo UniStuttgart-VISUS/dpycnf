@@ -1,5 +1,5 @@
 # dpycnf
-A simple header-only library for XML-based tiled display descriptions used for the Vvand. The library supports the XML format used by different in-house tool at VISUS like vv2, ca and the vvebbrowser.
+A simple header-only library for XML-based tiled display descriptions used for the Vvand. The library supports the XML format used by different in-house tools at VISUS like vv2, ca and the vvebbrowser.
 
 ## Usage
 

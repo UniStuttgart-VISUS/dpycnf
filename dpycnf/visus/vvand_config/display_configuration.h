@@ -56,7 +56,16 @@ namespace vvand_config {
         class recursive_tile_iterator : public std::iterator<
                 std::forward_iterator_tag, const tile_type> {
 
+            typedef std::iterator<std::forward_iterator_tag, const tile_type>
+                base;
+
         public:
+
+            typedef base::difference_type difference_type;
+            typedef base::iterator_category iterator_category;
+            typedef base::pointer pointer;
+            typedef base::reference reference;
+            typedef base::value_type value_type;
 
             /// <summary>
             /// Pre-increment.
