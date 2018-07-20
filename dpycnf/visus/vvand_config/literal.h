@@ -55,4 +55,12 @@ namespace detail {
 } /* end namespace vvand_config */
 } /* end namespace visus */
 
+
 #define DPYCNF_TPL_LITERAL(T, l) visus::vvand_config::detail::literal_selector<T>::select(l, L##l)
+
+
+#ifdef XML_UNICODE
+#define DPYCNF_XML_LITERAL(s) L##s
+#else /* XML_UNICODE */
+#define DPYCNF_XML_LITERAL(s) s
+#endif /* XML_UNICODE */

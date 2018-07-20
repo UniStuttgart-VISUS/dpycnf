@@ -6,6 +6,7 @@
 #pragma once
 
 #include "visus/vvand_config/display_configuration.h"
+#include "visus/vvand_config/literal.h"
 #include "visus/vvand_config/sax_parser.h"
 
 
@@ -58,6 +59,21 @@ namespace detail {
             tiles,
             tile
         };
+
+        static const XML_Char *tag_height;
+        static const XML_Char *tag_left_offset;
+        static const XML_Char *tag_identity;
+        static const XML_Char *tag_machine;
+        static const XML_Char *tag_machines;
+        static const XML_Char *tag_name;
+        static const XML_Char *tag_stereo_channel;
+        static const XML_Char *tag_tile;
+        static const XML_Char *tag_tiled_display;
+        static const XML_Char *tag_tiles;
+        static const XML_Char *tag_top_offset;
+        static const XML_Char *tag_width;
+        static const XML_Char *tag_window_width;
+        static const XML_Char *tag_window_height;
 
         string_type cdata;
         configuration_type currentConfig;

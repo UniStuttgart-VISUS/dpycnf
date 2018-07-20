@@ -7,6 +7,8 @@
 
 #include "dpycnf.h"
 
+#define _X(s) DPYCNF_XML_LITERAL(s)
+
 
 int _tmain(int argc, TCHAR **argv) {
     try {
