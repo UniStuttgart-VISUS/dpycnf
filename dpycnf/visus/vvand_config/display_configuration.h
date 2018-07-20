@@ -61,11 +61,11 @@ namespace vvand_config {
 
         public:
 
-            typedef base::difference_type difference_type;
-            typedef base::iterator_category iterator_category;
-            typedef base::pointer pointer;
-            typedef base::reference reference;
-            typedef base::value_type value_type;
+            typedef typename base::difference_type difference_type;
+            typedef typename base::iterator_category iterator_category;
+            typedef typename base::pointer pointer;
+            typedef typename base::reference reference;
+            typedef typename base::value_type value_type;
 
             /// <summary>
             /// Pre-increment.
