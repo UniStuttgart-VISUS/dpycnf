@@ -1,4 +1,7 @@
 # dpycnf
+
+[![Build Status](https://visualisierungsinstitut.visualstudio.com/dpycnf/_apis/build/status/UniStuttgart-VISUS.dpycnf?branchName=master)](https://visualisierungsinstitut.visualstudio.com/dpycnf/_build/latest?definitionId=4&branchName=master)
+
 A simple header-only library for XML-based tiled display descriptions used for the Vvand. The library supports the XML format used by different in-house tools at VISUS like vv2, ca and the vvebbrowser.
 
 ## Usage
