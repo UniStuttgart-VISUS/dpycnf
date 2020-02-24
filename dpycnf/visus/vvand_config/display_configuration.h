@@ -9,6 +9,7 @@
 #include <iterator>
 #include <vector>
 
+#include "visus/vvand_config/equals.h"
 #include "visus/vvand_config/literal.h"
 #include "visus/vvand_config/machine.h"
 
@@ -262,6 +263,16 @@ namespace vvand_config {
                     lhs << DPYCNF_TPL_LITERAL(T, "<WindowWidth>");
                     lhs << t->size().width;
                     lhs << DPYCNF_TPL_LITERAL(T, "</WindowWidth>");
+
+                    if (t->position() != nullptr) {
+                        lhs << DPYCNF_TPL_LITERAL(T, "<WindowLeft>");
+                        lhs << t->position()->left;
+                        lhs << DPYCNF_TPL_LITERAL(T, "</WindowLeft>");
+
+                        lhs << DPYCNF_TPL_LITERAL(T, "<WindowTop>");
+                        lhs << t->position()->top;
+                        lhs << DPYCNF_TPL_LITERAL(T, "</WindowTop>");
+                    }
                 }
                 lhs << DPYCNF_TPL_LITERAL(T, "</Tiles>");
 

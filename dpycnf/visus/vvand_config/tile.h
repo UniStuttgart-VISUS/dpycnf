@@ -1,5 +1,5 @@
 /// <copyright file="tile.h" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2018 Christoph Müller. Alle Rechte vorbehalten.
+/// Copyright © 2015 - 2020 Christoph Müller. Alle Rechte vorbehalten.
 /// </copyright>
 /// <author>Christoph Müller</author>
 
@@ -34,8 +34,14 @@ namespace vvand_config {
         typedef visus::vvand_config::stereo_channel stereo_channel_type;
         typedef std::basic_string<T> string_type;
 
-        tile(void);
+        /// <summary>
+        /// Initialises a new instance.
+        /// </summary>
+        tile(void) : _channel(stereo_channel_type::mono), _position(nullptr) { }
 
+        /// <summary>
+        /// Finalises the instance.
+        /// </summary>
         ~tile(void);
 
         /// <summary>
@@ -60,6 +66,14 @@ namespace vvand_config {
         }
 
         /// <summary>
+        /// Gets the (optional) position of the window on the desktop of the
+        /// machine.
+        /// </summary>
+        inline const offset_type *position(void) const {
+            return this->_position;
+        }
+
+        /// <summary>
         /// Gets the size of the tile.
         /// </summary>
         inline const size_type& size(void) const {
@@ -72,6 +86,7 @@ namespace vvand_config {
         string_type _name;
         offset_type _offset;
         size_type _size;
+        offset_type *_position;
 
         friend class detail::vvand_config_parser<T>;
     };

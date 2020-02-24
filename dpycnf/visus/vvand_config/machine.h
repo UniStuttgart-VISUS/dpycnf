@@ -1,5 +1,5 @@
 /// <copyright file="machine.h" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2018 Christoph Müller. Alle Rechte vorbehalten.
+/// Copyright © 2015 - 2020 Christoph Müller. Alle Rechte vorbehalten.
 /// </copyright>
 /// <author>Christoph Müller</author>
 
@@ -7,6 +7,7 @@
 
 #include <vector>
 
+#include "visus/vvand_config/equals.h"
 #include "visus/vvand_config/tile.h"
 
 
@@ -22,6 +23,7 @@ namespace vvand_config {
 
         typedef T char_type;
         typedef typename std::vector<tile<T>>::const_iterator iterator_type;
+        typedef typename tile<T>::offset_type offset_type;
         typedef std::basic_string<T> string_type;
         typedef tile<T> tile_type;
 
@@ -40,6 +42,18 @@ namespace vvand_config {
         }
 
         /// <summary>
+        /// Search the tile with the specified name.
+        /// </summary>
+        iterator_type find_tile(const string_type& name,
+            const bool caseSensitive = false) const;
+
+        /// <summary>
+        /// Search the tile using the specified offset.
+        /// </summary>
+        iterator_type find_tile(const offset_type& offset,
+            const bool windowOffset) const;
+
+        /// <summary>
         /// Answer the configured identity of the machine.
         /// </summary>
         const string_type& identity(void) const {
@@ -56,3 +70,5 @@ namespace vvand_config {
 
 } /* end namespace vvand_config */
 } /* end namespace visus */
+
+#include "visus/vvand_config/machine.inl"

@@ -87,21 +87,9 @@ template<class T>
 typename visus::vvand_config::display_configuration<T>::iterator_type
 visus::vvand_config::display_configuration<T>::find_machine(
         const string_type& identity, const bool caseSensitive) const {
-    string_type l;
-    if (caseSensitive) {
-        l = identity;
-    } else {
-        std::transform(identity.begin(), identity.end(),
-            std::back_inserter(l), ::tolower);
-    }
-
     return std::find_if(this->_machines.cbegin(), this->_machines.cend(),
             [&](const machine_type& m) -> bool {
-        string_type r = m.identity();
-        if (!caseSensitive) {
-            std::transform(r.begin(), r.end(), r.begin(), ::tolower);
-        }
-        return (l == r);
+        return detail::equals(identity, m.identity(), caseSensitive);
     });
 }
 

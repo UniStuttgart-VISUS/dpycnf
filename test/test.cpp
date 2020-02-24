@@ -49,6 +49,15 @@ int _tmain(int argc, TCHAR **argv) {
             }
         }
 
+        // Search a specific machine and tile.
+        {
+            auto mit = config.find_machine("keshiki01");
+            if (mit != config.end()) {
+                auto tit = mit->find_tile("(0, 0), [2400, 4096] auf Maschine keshiki01");
+                std::cout << "\"" << tit->name() << "\" on \"" << mit->identity() << "\"" << std::endl;
+            }
+        }
+
         // Dump the XML configuration into a stream.
         std::cout << config << std::endl;
 

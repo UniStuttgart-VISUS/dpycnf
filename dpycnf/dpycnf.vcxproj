@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="dpycnf.h" />
     <ClInclude Include="visus\vvand_config\display_configuration.h" />
+    <ClInclude Include="visus\vvand_config\equals.h" />
     <ClInclude Include="visus\vvand_config\literal.h" />
     <ClInclude Include="visus\vvand_config\machine.h" />
     <ClInclude Include="visus\vvand_config\offset.h" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="visus\vvand_config\display_configuration.inl" />
+    <None Include="visus\vvand_config\machine.inl" />
     <None Include="visus\vvand_config\sax_parser.inl" />
     <None Include="visus\vvand_config\tile.inl" />
     <None Include="visus\vvand_config\vvand_config_parser.inl" />
