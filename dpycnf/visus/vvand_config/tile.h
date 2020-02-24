@@ -37,7 +37,22 @@ namespace vvand_config {
         /// <summary>
         /// Initialises a new instance.
         /// </summary>
-        tile(void) : _channel(stereo_channel_type::mono), _position(nullptr) { }
+        inline tile(void) : _channel(stereo_channel_type::mono),
+            _position(nullptr) { }
+
+        /// <summary>
+        /// Clone <paramref name="rhs" />.
+        /// </summary>
+        inline tile(const tile& rhs) : _position(nullptr) {
+            *this = rhs;
+        }
+
+        /// <summary>
+        /// Move <paramref name="rhs" />.
+        /// </summary>
+        inline tile(tile&& rhs) : _position(nullptr) {
+            *this = std::move(rhs);
+        }
 
         /// <summary>
         /// Finalises the instance.
@@ -80,13 +95,23 @@ namespace vvand_config {
             return this->_size;
         }
 
+        /// <summary>
+        /// Assign <paramref name="rhs" />.
+        /// </summary>
+        tile& operator =(const tile& rhs);
+
+        /// <summary>
+        /// Move <paramref name="rhs" />.
+        /// </summary>
+        tile& operator =(tile&& rhs);
+
     private:
 
         stereo_channel_type _channel;
         string_type _name;
         offset_type _offset;
-        size_type _size;
         offset_type *_position;
+        size_type _size;
 
         friend class detail::vvand_config_parser<T>;
     };

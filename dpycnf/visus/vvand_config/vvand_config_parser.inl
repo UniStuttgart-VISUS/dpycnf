@@ -106,7 +106,7 @@ void visus::vvand_config::detail::vvand_config_parser<T>::on_end_element(
     } else if (base::are_strings_equal(name, tag_tile, false)) {
         if (this->currentScope == scope::tile) {
             this->currentScope = scope::tiles;
-            this->currentMachine._tiles.push_back(this->currentTile);
+            this->currentMachine._tiles.push_back(std::move(this->currentTile));
         } else {
             THROW_UNEXPECTED_TAG(tag_tile);
         }
@@ -221,7 +221,7 @@ void visus::vvand_config::detail::vvand_config_parser<T>::on_start_element(
 
     } else if (base::are_strings_equal(name, tag_tile, false)) {
         this->currentScope = scope::tile;
-        this->currentTile = tile_type();
+        this->currentTile = std::move(tile_type());
 
     } else if (base::are_strings_equal(name, tag_left_offset, false)) {
         // Nothing to do.
