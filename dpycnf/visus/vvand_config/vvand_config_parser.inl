@@ -139,7 +139,6 @@ void visus::vvand_config::detail::vvand_config_parser<T>::on_end_element(
             this->currentTile._size.height = std::max<int>(tmp, 0);
         }
 
-
     } else if (base::are_strings_equal(name, tag_stereo_channel, false)) {
         if (base::are_strings_equal(this->cdata.c_str(),
                 DPYCNF_XML_LITERAL("right"), false)) {
@@ -170,6 +169,22 @@ void visus::vvand_config::detail::vvand_config_parser<T>::on_end_element(
             this->currentTile._name = this->cdata;
         } else if (this->currentScope == scope::tiled_display) {
             this->currentConfig._name = this->cdata;
+        }
+
+    } else if (base::are_strings_equal(name, tag_window_left, false)) {
+        if (this->currentScope == scope::tile) {
+            if (this->currentTile._position == nullptr) {
+                this->currentTile._position = new offset(0, 0);
+            }
+            this->currentTile._position->left = std::stoi(this->cdata);
+        }
+
+    } else if (base::are_strings_equal(name, tag_window_top, false)) {
+        if (this->currentScope == scope::tile) {
+            if (this->currentTile._position == nullptr) {
+                this->currentTile._position = new offset(0, 0);
+            }
+            this->currentTile._position->top = std::stoi(this->cdata);
         }
 
     }
@@ -346,3 +361,19 @@ visus::vvand_config::detail::vvand_config_parser<T>::tag_window_height
 template<class T> const XML_Char *
 visus::vvand_config::detail::vvand_config_parser<T>::tag_window_width
 = DPYCNF_XML_LITERAL("WindowWidth");
+
+
+/*
+ * visus::vvand_config::detail::vvand_config_parser<T>::tag_window_left
+ */
+template<class T> const XML_Char *
+visus::vvand_config::detail::vvand_config_parser<T>::tag_window_left
+= DPYCNF_XML_LITERAL("WindowLeft");
+
+
+/*
+ * visus::vvand_config::detail::vvand_config_parser<T>::tag_window_top
+ */
+template<class T> const XML_Char *
+visus::vvand_config::detail::vvand_config_parser<T>::tag_window_top
+= DPYCNF_XML_LITERAL("WindowTop");

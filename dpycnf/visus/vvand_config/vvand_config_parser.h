@@ -74,6 +74,8 @@ namespace detail {
         static const XML_Char *tag_width;
         static const XML_Char *tag_window_width;
         static const XML_Char *tag_window_height;
+        static const XML_Char *tag_window_left;
+        static const XML_Char *tag_window_top;
 
         string_type cdata;
         configuration_type currentConfig;
