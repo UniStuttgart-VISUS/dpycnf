@@ -13,6 +13,7 @@ FetchContent_Declare(expat
     GIT_REPOSITORY https://github.com/libexpat/libexpat/
     GIT_TAG R_2_7_1
     GIT_PROGRESS ON
+    SOURCE_SUBDIR expat/
 )
 FetchContent_MakeAvailable(expat)
 
