@@ -1,15 +1,16 @@
-/// <copyright file="machine.inl" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2020 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="machine.inl" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2015 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 
 
 /*
- * visus::vvand_config::machine<T>::find_tile
+ * DPYCNF_NAMESPACE::machine<TChar>::find_tile
  */
-template<class T>
-typename visus::vvand_config::machine<T>::iterator_type
-visus::vvand_config::machine<T>::find_tile(const string_type& name,
+template<class TChar>
+typename DPYCNF_NAMESPACE::machine<TChar>::iterator_type
+DPYCNF_NAMESPACE::machine<TChar>::find_tile(const string_type& name,
         const bool caseSensitive) const {
     return std::find_if(this->_tiles.cbegin(), this->_tiles.cend(),
         [&](const tile_type& m) -> bool {
@@ -19,11 +20,11 @@ visus::vvand_config::machine<T>::find_tile(const string_type& name,
 
 
 /*
- * visus::vvand_config::machine<T>::find_tile
+ * DPYCNF_NAMESPACE::machine<TChar>::find_tile
  */
-template<class T>
-typename visus::vvand_config::machine<T>::iterator_type
-visus::vvand_config::machine<T>::find_tile(const offset_type& offset,
+template<class TChar>
+typename DPYCNF_NAMESPACE::machine<TChar>::iterator_type
+DPYCNF_NAMESPACE::machine<TChar>::find_tile(const offset_type& offset,
         const bool windowOffset) const {
     return std::find_if(this->_tiles.cbegin(), this->_tiles.cend(),
         [&](const tile_type& m) -> bool {

@@ -1,15 +1,16 @@
-/// <copyright file="display_configuration.inl" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2018 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="display_configuration.inl" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2015 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 
 
 /*
  * ...recursive_tile_iterator::operator ++
  */
-template<class T>
-typename visus::vvand_config::display_configuration<T>::recursive_tile_iterator&
-visus::vvand_config::display_configuration<T>::recursive_tile_iterator::operator ++(
+template<class TChar>
+typename DPYCNF_NAMESPACE::display_configuration<TChar>::recursive_tile_iterator&
+DPYCNF_NAMESPACE::display_configuration<TChar>::recursive_tile_iterator::operator ++(
         void) {
     if (this->mit != this->machines.cend()) {
         if (++this->tit == this->mit->end()) {
@@ -25,8 +26,8 @@ visus::vvand_config::display_configuration<T>::recursive_tile_iterator::operator
 /*
  * ...::recursive_tile_iterator::operator ==
  */
-template<class T>
-bool visus::vvand_config::display_configuration<T>::recursive_tile_iterator::operator ==(
+template<class TChar>
+bool DPYCNF_NAMESPACE::display_configuration<TChar>::recursive_tile_iterator::operator ==(
         const recursive_tile_iterator& rhs) const {
     if (this->mit == rhs.mit) {
         if (this->mit != this->machines.cend()) {
@@ -44,8 +45,8 @@ bool visus::vvand_config::display_configuration<T>::recursive_tile_iterator::ope
 /*
  * ...::recursive_tile_iterator::recursive_tile_iterator
  */
-template<class T>
-visus::vvand_config::display_configuration<T>::recursive_tile_iterator::recursive_tile_iterator(
+template<class TChar>
+DPYCNF_NAMESPACE::display_configuration<TChar>::recursive_tile_iterator::recursive_tile_iterator(
         const collection_type& machines, const bool isBegin)
         : machines(machines) {
     this->mit = isBegin ? machines.cbegin() : machines.cend();
@@ -58,34 +59,34 @@ visus::vvand_config::display_configuration<T>::recursive_tile_iterator::recursiv
 
 
 /*
- * visus::vvand_config::display_configuration<T>::load
+ * DPYCNF_NAMESPACE::display_configuration<T>::load
  */
-template<class T>
-visus::vvand_config::display_configuration<T>
-visus::vvand_config::display_configuration<T>::load(const string_type& path) {
-    detail::vvand_config_parser<T> parser;
+template<class TChar>
+DPYCNF_NAMESPACE::display_configuration<TChar>
+DPYCNF_NAMESPACE::display_configuration<TChar>::load(const string_type& path) {
+    detail::vvand_config_parser<TChar> parser;
     return parser.parse_file(path);
 }
 
 
 /*
- * visus::vvand_config::display_configuration<T>::Parse
+ * DPYCNF_NAMESPACE::display_configuration<T>::Parse
  */
-template<class T>
-visus::vvand_config::display_configuration<T>
-visus::vvand_config::display_configuration<T>::parse(const string_type& text) {
-    detail::vvand_config_parser<T> parser;
+template<class TChar>
+DPYCNF_NAMESPACE::display_configuration<TChar>
+DPYCNF_NAMESPACE::display_configuration<TChar>::parse(const string_type& text) {
+    detail::vvand_config_parser<TChar> parser;
     return parser.parse_text(text);
 }
 
 
 
 /*
- * visus::vvand_config::display_configuration<T>::find_machine
+ * DPYCNF_NAMESPACE::display_configuration<T>::find_machine
  */
-template<class T>
-typename visus::vvand_config::display_configuration<T>::iterator_type
-visus::vvand_config::display_configuration<T>::find_machine(
+template<class TChar>
+typename DPYCNF_NAMESPACE::display_configuration<TChar>::iterator_type
+DPYCNF_NAMESPACE::display_configuration<TChar>::find_machine(
         const string_type& identity, const bool caseSensitive) const {
     return std::find_if(this->_machines.cbegin(), this->_machines.cend(),
             [&](const machine_type& m) -> bool {
@@ -96,11 +97,11 @@ visus::vvand_config::display_configuration<T>::find_machine(
 
 #if 0
 /*
- * visus::vvand_config::display_configuration<T>::FindMachine
+ * DPYCNF_NAMESPACE::display_configuration<T>::FindMachine
  */
-template<class T>
-visus::vvand_config::display_configuration<T>::MachineCollectionType::const_iterator
-visus::vvand_config::display_configuration<T>::FindMachine(void) const {
+template<class TChar>
+DPYCNF_NAMESPACE::display_configuration<TChar>::MachineCollectionType::const_iterator
+DPYCNF_NAMESPACE::display_configuration<TChar>::FindMachine(void) const {
     string_type::value_type name[MAX_COMPUTERNAME_LENGTH + 1];
     auto size = static_cast<DWORD>(std::size(name));
 
@@ -115,10 +116,10 @@ visus::vvand_config::display_configuration<T>::FindMachine(void) const {
 
 
 /*
- * visus::vvand_config::display_configuration<T>::range
+ * DPYCNF_NAMESPACE::display_configuration<T>::range
  */
-template<class T>
-bool visus::vvand_config::display_configuration<T>::range(
+template<class TChar>
+bool DPYCNF_NAMESPACE::display_configuration<TChar>::range(
         offset& outBegin, offset& outEnd) const {
     typedef std::numeric_limits<offset::value_type> offset_limits;
     auto minX = (offset_limits::max)();
@@ -154,16 +155,3 @@ bool visus::vvand_config::display_configuration<T>::range(
 
     return retval;
 }
-
-/*
-<TiledDisplay xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.visus.uni-stuttgart.de/vvand/2012/description">
-  <Machines>
-    <Machine>
-      <Identity>keshiki01</Identity>
-      <Tiles>
-        <Tile>
-
-        </Tile>
-      </Tiles>
-    </Machine>
-*/

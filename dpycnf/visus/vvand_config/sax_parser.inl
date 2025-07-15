@@ -1,7 +1,8 @@
-/// <copyright file="sax_parser.cpp" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2014 - 2018 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+// <copyright file="sax_parser.inl" company="Visualisierungsinstitut der Universität Stuttgart">
+// Copyright © 2014 - 2025 Visualisierungsinstitut der Universität Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph Müller</author>
 /*
  * sax_parser.h
  *
@@ -10,10 +11,10 @@
 
 
 /*
- * visus::vvand_config::detail::sax_parser<T>::sax_parser
+ * DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::sax_parser
  */
-template<class T>
-visus::vvand_config::detail::sax_parser<T>::sax_parser(const size_t bufferSize)
+template<class TChar>
+DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::sax_parser(const size_t bufferSize)
         : buffer(bufferSize) {
     this->parser = ::XML_ParserCreate(nullptr);
     ::XML_SetUserData(this->parser, this);
@@ -24,19 +25,19 @@ visus::vvand_config::detail::sax_parser<T>::sax_parser(const size_t bufferSize)
 
 
 /*
- * visus::vvand_config::detail::sax_parser<T>::~sax_parser
+ * DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::~sax_parser
  */
-template<class T>
-visus::vvand_config::detail::sax_parser<T>::~sax_parser(void) {
+template<class TChar>
+DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::~sax_parser(void) noexcept {
     ::XML_ParserFree(this->parser);
 }
 
 
 /*
- * visus::vvand_config::detail::sax_parser<T>::parse_file
+ * DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::parse_file
  */
-template<class T>
-void visus::vvand_config::detail::sax_parser<T>::parse_file(
+template<class TChar>
+void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::parse_file(
         const string_type& path) {
     std::size_t bytesRead = 0;
 
@@ -48,7 +49,7 @@ void visus::vvand_config::detail::sax_parser<T>::parse_file(
     /* Create a stream and make it throw on I/O errors. */
     std::ifstream stream;
     stream.exceptions(stream.exceptions() | std::ios::failbit);
-    stream.open(xml_exception<T>::to_string(path.c_str()),
+    stream.open(xml_exception<TChar>::to_string(path.c_str()),
         std::ifstream::binary);
     stream.exceptions(stream.exceptions() & ~std::ios::failbit);
 
@@ -68,10 +69,10 @@ void visus::vvand_config::detail::sax_parser<T>::parse_file(
 
 
 /*
- * visus::vvand_config::detail::sax_parser<T>::parse_text
+ * DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::parse_text
  */
-template<class T>
-void visus::vvand_config::detail::sax_parser<T>::parse_text(
+template<class TChar>
+void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::parse_text(
         const string_type& text) {
     auto status = ::XML_Parse(this->parser,
         reinterpret_cast<const byte_type *>(text.c_str()),
@@ -86,10 +87,10 @@ void visus::vvand_config::detail::sax_parser<T>::parse_text(
 
 
 /*
- * visus::vvand_config::detail::sax_parser<T>::are_strings_equal
+ * DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::are_strings_equal
  */
-template<class T>
-bool visus::vvand_config::detail::sax_parser<T>::are_strings_equal(
+template<class TChar>
+bool DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::are_strings_equal(
         const char_type *s1, const char_type *s2, const bool isCaseSensitive) {
     if (s1 == s2) {
         return true;
@@ -109,30 +110,30 @@ bool visus::vvand_config::detail::sax_parser<T>::are_strings_equal(
 
 
 /*
- * visus::vvand_config::detail::sax_parser<T>::on_characters
+ * DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_characters
  */
-template<class T>
-void visus::vvand_config::detail::sax_parser<T>::on_characters(
+template<class TChar>
+void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_characters(
         const char_type *s, const int len) {
     // Do nothing.
 }
 
 
 /*
- * visus::vvand_config::detail::sax_parser<T>::on_end_element
+ * DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_end_element
  */
-template<class T>
-void visus::vvand_config::detail::sax_parser<T>::on_end_element(
+template<class TChar>
+void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_end_element(
         const char_type *name) {
     // Do nothing.
 }
 
 
 /*
- * visus::vvand_config::detail::sax_parser<T>::on_start_element
+ * DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_start_element
  */
-template<class T>
-void visus::vvand_config::detail::sax_parser<T>::on_start_element(
+template<class TChar>
+void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_start_element(
         const char_type *name, const char_type **atts) {
     // Do nothing.
 }

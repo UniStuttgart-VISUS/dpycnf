@@ -1,15 +1,16 @@
-/// <copyright file="xml_exception.h" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2014 - 2015 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="xml_exception.h" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2014 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 /*
  * XmlException.h
  *
- * Copyright (C) 2009 by Christoph Müller. Alle Rechte vorbehalten.
+ * Copyright (C) 2009 by Christoph MÃ¼ller. Alle Rechte vorbehalten.
  */
 
-#ifndef XMLEXCEPTION_H_INCLUDED
-#define XMLEXCEPTION_H_INCLUDED
+#if !defined(_DPYCNF_VISUS_VVAND_CONFIG_XML_EXCEPTION_H)
+#define _DPYCNF_VISUS_VVAND_CONFIG_XML_EXCEPTION_H
 #if (defined(_MSC_VER) && (_MSC_VER > 1000))
 #pragma once
 #endif /* (defined(_MSC_VER) && (_MSC_VER > 1000)) */
@@ -25,142 +26,142 @@
 
 #include <expat.h>
 
+#include "visus/vvand_config/api.h"
 
-namespace visus {
-namespace vvand_config {
+
+DPYCNF_NAMESPACE_BEGIN
+
+/// <summary>
+/// This exception represents an XML parsing error.
+/// </summary>
+template<class TChar> class xml_exception : public std::exception {
+
+public:
 
     /// <summary>
-    /// This exception represents an XML parsing error.
+    /// The type of characters that the parser processes.
     /// </summary>
-    template<class T> class xml_exception : public std::exception {
+    typedef TChar char_type;
 
-    public:
+    /// <summary>
+    /// The type of the XML parser's error codes.
+    /// </summary>
+    typedef ::XML_Error error_type;
 
-        /// <summary>
-        /// The type of characters that the parser processes.
-        /// </summary>
-        typedef T char_type;
+    /// <summary>
+    /// The type for sizes and positions in the XML parser.
+    /// </summary>
+    typedef ::XML_Size size_type;
 
-        /// <summary>
-        /// The type of the XML parser's error codes.
-        /// </summary>
-        typedef ::XML_Error error_type;
+    /// <summary>
+    /// The type of strings that the parser processes.
+    /// </summary>
+    typedef std::basic_string<TChar> string_type;
 
-        /// <summary>
-        /// The type for sizes and positions in the XML parser.
-        /// </summary>
-        typedef ::XML_Size size_type;
+    /// <summary>
+    /// Gets a string description for an Expat error code.
+    /// </summary>
+    static inline std::string to_string(const error_type errorCode) {
+        return xml_exception::to_string(::XML_ErrorString(errorCode));
+    }
 
-        /// <summary>
-        /// The type of strings that the parser processes.
-        /// </summary>
-        typedef std::basic_string<T> string_type;
+    /// <summary>
+    /// Gets an std::string for an Expat string.
+    /// </summary>
+    template<class Tp>
+    static inline typename std::enable_if<std::is_same<
+        std::string::value_type, Tp>::value, std::string>::type
+    to_string(const Tp *errorMsg) {
+        assert(errorMsg != nullptr);
+        return errorMsg;
+    }
 
-        /// <summary>
-        /// Gets a string description for an Expat error code.
-        /// </summary>
-        static inline std::string to_string(const error_type errorCode) {
-            return xml_exception::to_string(::XML_ErrorString(errorCode));
-        }
+    /// <summary>
+    /// Gets an std::string for an Expat string.
+    /// </summary>
+    template<class Tp>
+    static inline typename std::enable_if<!std::is_same<
+        std::string::value_type, Tp>::value, std::string>::type
+    to_string(const Tp *errorMsg) {
+        typedef std::codecvt_utf8<Tp> c_t;
+        typedef std::basic_string<Tp> s_t;
+        assert(errorMsg != nullptr);
+        std::wstring_convert<c_t, Tp> converter;
+        return converter.to_bytes(s_t(errorMsg));
+    }
 
-        /// <summary>
-        /// Gets an std::string for an Expat string.
-        /// </summary>
-        template<class Tp>
-        static inline typename std::enable_if<std::is_same<
-            std::string::value_type, Tp>::value, std::string>::type
-        to_string(const Tp *errorMsg) {
-            assert(errorMsg != nullptr);
-            return errorMsg;
-        }
+    /// <summary>
+    /// Create a new exception that represents the Expat error
+    /// <paramref name="errorCode" />.
+    /// </summary>
+    xml_exception(const error_type errorCode, const size_type xmlLine,
+        const size_type xmlColumn, const char *file, const int line);
 
-        /// <summary>
-        /// Gets an std::string for an Expat string.
-        /// </summary>
-        template<class Tp>
-        static inline typename std::enable_if<!std::is_same<
-            std::string::value_type, Tp>::value, std::string>::type
-        to_string(const Tp *errorMsg) {
-            typedef std::codecvt_utf8<Tp> c_t;
-            typedef std::basic_string<Tp> s_t;
-            assert(errorMsg != nullptr);
-            std::wstring_convert<c_t, Tp> converter;
-            return converter.to_bytes(s_t(errorMsg));
-        }
+    /// <summary>
+    /// Create a new exception with a custom error message.
+    /// </summary>
+    xml_exception(const char_type *customMsg, const size_type xmlLine,
+        const size_type xmlColumn, const char *file, const int line);
 
-        /// <summary>
-        /// Create a new exception that represents the Expat error
-        /// <paramref name="errorCode" />.
-        /// </summary>
-        xml_exception(const error_type errorCode, const size_type xmlLine,
-            const size_type xmlColumn, const char *file, const int line);
+    /// <summary>
+    /// Dtor.
+    /// </summary>
+    virtual ~xml_exception(void) noexcept = default;
 
-        /// <summary>
-        /// Create a new exception with a custom error message.
-        /// </summary>
-        xml_exception(const char_type *customMsg, const size_type xmlLine,
-            const size_type xmlColumn, const char *file, const int line);
+    /// <summary>
+    /// Gets the error code encapsulated in the exception.
+    /// </summary>
+    inline error_type error_code(void) const {
+        return this->_error_code;
+    }
 
-        /// <summary>
-        /// Dtor.
-        /// </summary>
-        virtual ~xml_exception(void);
+    /// <summary>
+    /// Gets the file in which the exception was thrown.
+    /// </summary>
+    inline const std::string& file(void) const {
+        return this->_file;
+    }
 
-        /// <summary>
-        /// Gets the error code encapsulated in the exception.
-        /// </summary>
-        inline error_type error_code(void) const {
-            return this->_error_code;
-        }
+    /// <summary>
+    /// Gets the line in which the exception was thrown.
+    /// </summary>
+    inline int line(void) const {
+        return this->_line;
+    }
 
-        /// <summary>
-        /// Gets the file in which the exception was thrown.
-        /// </summary>
-        inline const std::string& file(void) const {
-            return this->_file;
-        }
+    /// <summary>
+    /// Gets the column in which a parsing error occurred.
+    /// </summary>
+    inline size_type xml_column(void) const {
+        return this->_xml_column;
+    }
 
-        /// <summary>
-        /// Gets the line in which the exception was thrown.
-        /// </summary>
-        inline int line(void) const {
-            return this->_line;
-        }
+    /// <summary>
+    /// Gets the line in which a parsing error occurred.
+    /// </summary>
+    inline size_type xml_line(void) const {
+        return this->_xml_line;
+    }
 
-        /// <summary>
-        /// Gets the column in which a parsing error occurred.
-        /// </summary>
-        inline size_type xml_column(void) const {
-            return this->_xml_column;
-        }
+private:
 
-        /// <summary>
-        /// Gets the line in which a parsing error occurred.
-        /// </summary>
-        inline size_type xml_line(void) const {
-            return this->_xml_line;
-        }
+    /// <summary>
+    /// Base class type.
+    /// </summary>
+    typedef std::exception base;
 
-    private:
+    error_type _error_code;
+    std::string _file;
+    int _line;
+    size_type _xml_column;
+    size_type _xml_line;
+};
 
-        /// <summary>
-        /// Base class type.
-        /// </summary>
-        typedef std::exception base;
-
-        error_type _error_code;
-        std::string _file;
-        int _line;
-        size_type _xml_column;
-        size_type _xml_line;
-    };
-
-} /* namespace vvand_config */
-} /* end namespace visus */
+DPYCNF_NAMESPACE_END
 
 #include "visus/vvand_config/xml_exception.inl"
 
 #if defined(_WIN32) && defined(_MANAGED)
 #pragma managed(pop)
 #endif /* defined(_WIN32) && defined(_MANAGED) */
-#endif /* XMLEXCEPTION_H_INCLUDED */
+#endif /* !defined(_DPYCNF_VISUS_VVAND_CONFIG_XML_EXCEPTION_H) */

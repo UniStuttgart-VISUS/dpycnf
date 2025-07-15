@@ -1,22 +1,38 @@
-/// <copyright file="stereo_channel.h" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2018 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="stereo_channel.h" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2015 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 
+#if !defined(_DPYCNF_VISUS_VVAND_CONFIG_STEREO_CHANNEL_H)
+#define _DPYCNF_VISUS_VVAND_CONFIG_STEREO_CHANNEL_H
 #pragma once
 
+#include "visus/vvand_config/api.h"
 
-namespace visus {
-namespace vvand_config {
+
+DPYCNF_NAMESPACE_BEGIN
+
+/// <summary>
+/// Defines possible stereo channels.
+/// </summary>
+enum class stereo_channel {
+    /// <summary>
+    /// There is only one channel.
+    /// </summary>
+    mono = 0,
 
     /// <summary>
-    /// Defines possible stereo channels.
+    /// The channel for the left eye.
     /// </summary>
-    enum class stereo_channel {
-        mono = 0,
-        left,
-        right
-    };
+    left,
 
-} /* end namespace vvand_config */
-} /* end namespace visus */
+    /// <summary>
+    /// The channel for the right eye.
+    /// </summary>
+    right
+};
+
+DPYCNF_NAMESPACE_END
+
+#endif /* !defined(_DPYCNF_VISUS_VVAND_CONFIG_STEREO_CHANNEL_H) */

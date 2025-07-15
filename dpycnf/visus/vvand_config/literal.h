@@ -1,8 +1,11 @@
-﻿/// <copyright file="literal.h" company="Visualisierungsinstitut der Universit�t Stuttgart">
-/// Copyright © 2017 - 2018 Visualisierungsinstitut der Universität Stuttgart. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+﻿// <copyright file="literal.h" company="Visualisierungsinstitut der Universit�t Stuttgart">
+// Copyright © 2017 - 2025 Visualisierungsinstitut der Universität Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph Müller</author>
 
+#if !defined(_DPYCNF_VISUS_VVAND_CONFIG_LITERAL_H)
+#define _DPYCNF_VISUS_VVAND_CONFIG_LITERAL_H
 #pragma once
 
 
@@ -23,40 +26,36 @@
 #endif /* !defined(XML_UNICODE) && (defined(A2T)) */
 
 
-namespace visus {
-namespace vvand_config {
-namespace detail {
+DPYCNF_DETAIL_NAMESPACE_BEGIN
 
-    template<class T> struct literal_selector {
-        typedef T char_type;
-    };
+template<class TChar> struct literal_selector {
+    typedef TChar char_type;
+};
 
-    template<> struct literal_selector<char> {
-        typedef char char_type;
-        static const char_type select(const char n, const wchar_t w) {
-            return n;
-        }
-        static const char_type *select(const char *n, const wchar_t *w) {
-            return n;
-        }
-    };
+template<> struct literal_selector<char> {
+    typedef char char_type;
+    static const char_type select(const char n, const wchar_t w) {
+        return n;
+    }
+    static const char_type *select(const char *n, const wchar_t *w) {
+        return n;
+    }
+};
 
-    template<> struct literal_selector<wchar_t> {
-        typedef wchar_t char_type;
-        static const char_type select(const char n, const wchar_t w) {
-            return w;
-        }
-        static const char_type *select(const char *n, const wchar_t *w) {
-            return w;
-        }
-    };
+template<> struct literal_selector<wchar_t> {
+    typedef wchar_t char_type;
+    static const char_type select(const char n, const wchar_t w) {
+        return w;
+    }
+    static const char_type *select(const char *n, const wchar_t *w) {
+        return w;
+    }
+};
 
-} /* end namespace detail */
-} /* end namespace vvand_config */
-} /* end namespace visus */
+DPYCNF_DETAIL_NAMESPACE_END
 
 
-#define DPYCNF_TPL_LITERAL(T, l) visus::vvand_config::detail::literal_selector<T>::select(l, L##l)
+#define DPYCNF_TPL_LITERAL(TChar, l) DPYCNF_DETAIL_NAMESPACE::literal_selector<TChar>::select(l, L##l)
 
 
 #ifdef XML_UNICODE
@@ -64,3 +63,5 @@ namespace detail {
 #else /* XML_UNICODE */
 #define DPYCNF_XML_LITERAL(s) s
 #endif /* XML_UNICODE */
+
+#endif /* !defined(_DPYCNF_VISUS_VVAND_CONFIG_LITERAL_H) */

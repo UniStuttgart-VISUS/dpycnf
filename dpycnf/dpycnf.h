@@ -1,12 +1,32 @@
-/// <copyright file="dpycnf.h" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2018 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="dpycnf.h" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2015 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 
+#if !defined(_DPYCNF_H)
+#define _DPYCNF_H
 #pragma once
+
+
+/// <summary>
+/// A helper for implementing <see cref="DPYCNF_CONCAT" />.
+/// </summary>
+#define _DPYCNF_CONCAT(l, r) l ##r
+
+/// <summary>
+/// Concatenates two preprocessor symbols.
+/// </summary>
+/// <param name="l">The left-hand side operand.</param>
+/// <param name="r">The right-hand side operand.</param>
+#define DPYCNF_CONCAT(l, r) _DPYCNF_CONCAT(l, r)
+
+
 
 #include "visus/vvand_config/display_configuration.h"
 #include "visus/vvand_config/machine.h"
 #include "visus/vvand_config/offset.h"
 #include "visus/vvand_config/tile.h"
 #include "visus/vvand_config/size.h"
+
+#endif /* !defined(_DPYCNF_H) */

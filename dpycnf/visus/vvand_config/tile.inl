@@ -1,15 +1,14 @@
-/// <copyright file="tile.inl" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2020 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="tile.inl" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2015 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 
 
 /*
- * visus::vvand_config::tile<T>::~tile
+ * DPYCNF_NAMESPACE::tile<T>::~tile
  */
-template<class T>
-visus::vvand_config::tile<T>::~tile(void) {
-    if (this->_position != nullptr) {
-        delete this->_position;
-    }
+template<class TChar>
+DPYCNF_NAMESPACE::tile<TChar>::~tile(void) noexcept {
+    delete this->_position;
 }

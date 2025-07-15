@@ -57,6 +57,9 @@
     <ClInclude Include="visus\vvand_config\equals.h">
       <Filter>Header Files\visus\vvand_config</Filter>
     </ClInclude>
+    <ClInclude Include="visus\vvand_config\api.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="visus\vvand_config\tile.inl">
@@ -74,9 +77,9 @@
     <None Include="visus\vvand_config\sax_parser.inl">
       <Filter>Header Files\visus\vvand_config</Filter>
     </None>
-    <None Include="packages.config" />
     <None Include="visus\vvand_config\machine.inl">
       <Filter>Header Files\visus\vvand_config</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

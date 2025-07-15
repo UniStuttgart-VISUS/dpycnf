@@ -1,55 +1,61 @@
-/// <copyright file="size.h" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2018 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="size.h" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2015 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 
+#if !defined(_DPYCNF_VISUS_VVAND_CONFIG_SIZE_H)
+#define _DPYCNF_VISUS_VVAND_CONFIG_SIZE_H
 #pragma once
 
 #include <cinttypes>
 
+#include "visus/vvand_config/api.h"
 
-namespace visus {
-namespace vvand_config {
+
+DPYCNF_NAMESPACE_BEGIN
+
+/// <summary>
+/// Specifies a two-dimensional size.
+/// </summary>
+class size {
+
+public:
 
     /// <summary>
-    /// Specifies a two-dimensional size.
+    /// The type to measure width and height.
     /// </summary>
-    class size {
+    typedef unsigned int value_type;
 
-    public:
+    /// <summary>
+    /// Initialises a new instance.
+    /// </summary>
+    /// <param name="width">The width of the area.</param>
+    /// <param name="height">The height of the area.</param>
+    inline size(const value_type width = 0,
+            const value_type height = 0) noexcept
+        : width(width), height(height) { }
 
-        /// <summary>
-        /// The type to measure width and height.
-        /// </summary>
-        typedef unsigned int value_type;
+    /// <summary>
+    /// Answer whether the area is empty.
+    /// <summary>
+    /// <returns><c>true</c> if the area is empty, <c>false</c> otherwise.
+    /// </returns>
+    inline bool empty(void) const {
+        return (this->width * this->height == 0);
+    }
 
-        /// <summary>
-        /// Initialises a new instance.
-        /// </summary>
-        /// <param name="width">The width of the area.</param>
-        /// <param name="height">The height of the area.</param>
-        inline size(const value_type width = 0, const value_type height = 0)
-            : width(width), height(height) { }
+    /// <summary>
+    /// The width of the area.
+    /// </summary>
+    value_type width;
 
-        /// <summary>
-        /// Answer whether the area is empty.
-        /// <summary>
-        /// <returns><c>true</c> if the area is empty, <c>false</c> otherwise.
-        /// </returns>
-        inline bool empty(void) const {
-            return (this->width * this->height == 0);
-        }
+    /// <summary>
+    /// The height of the area.
+    /// </summary>
+    value_type height;
+};
 
-        /// <summary>
-        /// The width of the area.
-        /// </summary>
-        value_type width;
+DPYCNF_NAMESPACE_END
 
-        /// <summary>
-        /// The height of the area.
-        /// </summary>
-        value_type height;
-    };
-
-} /* end namespace vvand_config */
-} /* end namespace visus */
+#endif /* !defined(_DPYCNF_VISUS_VVAND_CONFIG_SIZE_H) */

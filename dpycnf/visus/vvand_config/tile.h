@@ -1,8 +1,11 @@
-/// <copyright file="tile.h" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2020 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="tile.h" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2015 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 
+#if !defined(_DPYCNF_VISUS_VVAND_CONFIG_TILE_H)
+#define _DPYCNF_VISUS_VVAND_CONFIG_TILE_H
 #pragma once
 
 #include <cinttypes>
@@ -13,85 +16,87 @@
 #include "visus/vvand_config/stereo_channel.h"
 
 
-namespace visus {
-namespace vvand_config {
+DPYCNF_NAMESPACE_BEGIN
 
-    /* Forward declarations. */
-    namespace detail { template<class> class vvand_config_parser; }
+/* Forward declarations. */
+namespace detail { template<class> class vvand_config_parser; }
 
+
+/// <summary>
+/// Represents a single tile of the display that is driven by a specific
+/// <see cref="visus::vvand_config::machine" />.
+/// </summary>
+template<class TChar> class tile {
+
+public:
+
+    typedef TChar char_type;
+    typedef visus::vvand_config::offset offset_type;
+    typedef visus::vvand_config::size size_type;
+    typedef visus::vvand_config::stereo_channel stereo_channel_type;
+    typedef std::basic_string<TChar> string_type;
 
     /// <summary>
-    /// Represents a single tile of the display that is driven by a specific
-    /// <see cref="visus::vvand_config::machine" />.
+    /// Initialises a new instance.
     /// </summary>
-    template<class T> class tile {
+    tile(void) noexcept
+        : _channel(stereo_channel_type::mono),
+        _position(nullptr) { }
 
-    public:
+    /// <summary>
+    /// Finalises the instance.
+    /// </summary>
+    ~tile(void) noexcept;
 
-        typedef T char_type;
-        typedef visus::vvand_config::offset offset_type;
-        typedef visus::vvand_config::size size_type;
-        typedef visus::vvand_config::stereo_channel stereo_channel_type;
-        typedef std::basic_string<T> string_type;
+    /// <summary>
+    /// Gets the stereo channel that is displayed on the tile.
+    /// </summary>
+    inline stereo_channel_type channel(void) const noexcept {
+        return this->_channel;
+    }
 
-        /// <summary>
-        /// Initialises a new instance.
-        /// </summary>
-        tile(void) : _channel(stereo_channel_type::mono), _position(nullptr) { }
+    /// <summary>
+    /// Gets the user-defined name of the tile.
+    /// </summary>
+    inline const string_type& name(void) const noexcept {
+        return this->_name;
+    }
 
-        /// <summary>
-        /// Finalises the instance.
-        /// </summary>
-        ~tile(void);
+    /// <summary>
+    /// Gets the offset of the tile from the origin of the tiled display.
+    /// </summary>
+    inline const offset_type& offset(void) const noexcept {
+        return this->_offset;
+    }
 
-        /// <summary>
-        /// Gets the stereo channel that is displayed on the tile.
-        /// </summary>
-        inline stereo_channel_type channel(void) const {
-            return this->_channel;
-        }
+    /// <summary>
+    /// Gets the (optional) position of the window on the desktop of the
+    /// machine.
+    /// </summary>
+    inline const offset_type *position(void) const noexcept {
+        return this->_position;
+    }
 
-        /// <summary>
-        /// Gets the user-defined name of the tile.
-        /// </summary>
-        inline const string_type& name(void) const {
-            return this->_name;
-        }
+    /// <summary>
+    /// Gets the size of the tile.
+    /// </summary>
+    inline const size_type& size(void) const noexcept {
+        return this->_size;
+    }
 
-        /// <summary>
-        /// Gets the offset of the tile from the origin of the tiled display.
-        /// </summary>
-        inline const offset_type& offset(void) const {
-            return this->_offset;
-        }
+private:
 
-        /// <summary>
-        /// Gets the (optional) position of the window on the desktop of the
-        /// machine.
-        /// </summary>
-        inline const offset_type *position(void) const {
-            return this->_position;
-        }
+    stereo_channel_type _channel;
+    string_type _name;
+    offset_type _offset;
+    size_type _size;
+    offset_type *_position;
 
-        /// <summary>
-        /// Gets the size of the tile.
-        /// </summary>
-        inline const size_type& size(void) const {
-            return this->_size;
-        }
+    friend class detail::vvand_config_parser<TChar>;
+};
 
-    private:
-
-        stereo_channel_type _channel;
-        string_type _name;
-        offset_type _offset;
-        size_type _size;
-        offset_type *_position;
-
-        friend class detail::vvand_config_parser<T>;
-    };
-
-} /* end namespace vvand_config */
-} /* end namespace visus */
+DPYCNF_NAMESPACE_END
 
 #include "visus/vvand_config/tile.inl"
+
+#endif /* !defined(_DPYCNF_VISUS_VVAND_CONFIG_TILE_H) */

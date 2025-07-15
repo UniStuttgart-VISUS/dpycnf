@@ -1,31 +1,16 @@
-/// <copyright file="vvand_config_parser.inl" company="Visualisierungsinstitut der Universität Stuttgart">
-/// Copyright © 2015 - 2018 Christoph Müller. Alle Rechte vorbehalten.
-/// </copyright>
-/// <author>Christoph Müller</author>
+ï»¿// <copyright file="vvand_config_parser.inl" company="Visualisierungsinstitut der UniversitÃ¤t Stuttgart">
+// Copyright Â© 2015 - 2025 Visualisierungsinstitut der UniversitÃ¤t Stuttgart.
+// Licensed under the MIT licence. See LICENCE file for details.
+// </copyright>
+// <author>Christoph MÃ¼ller</author>
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::vvand_config_parser
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::parse_file
  */
-template<class T>
-visus::vvand_config::detail::vvand_config_parser<T>::vvand_config_parser(
-    void) { }
-
-
-/*
- * visus::vvand_config::detail::vvand_config_parser<T>::~vvand_config_parser
- */
-template<class T>
-visus::vvand_config::detail::vvand_config_parser<T>::~vvand_config_parser(
-    void) { }
-
-
-/*
- * visus::vvand_config::detail::vvand_config_parser<T>::parse_file
- */
-template<class T>
-typename visus::vvand_config::detail::vvand_config_parser<T>::configuration_type
-visus::vvand_config::detail::vvand_config_parser<T>::parse_file(
+template<class TChar>
+typename DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::configuration_type
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::parse_file(
         const string_type& path) {
     base::parse_file(path);
     return this->currentConfig;
@@ -33,11 +18,11 @@ visus::vvand_config::detail::vvand_config_parser<T>::parse_file(
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::parse_text
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::parse_text
  */
-template<class T>
-typename visus::vvand_config::detail::vvand_config_parser<T>::configuration_type
-visus::vvand_config::detail::vvand_config_parser<T>::parse_text(
+template<class TChar>
+typename DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::configuration_type
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::parse_text(
         const string_type& text) {
     base::parse_text(text);
     return this->currentConfig;
@@ -45,10 +30,10 @@ visus::vvand_config::detail::vvand_config_parser<T>::parse_text(
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::on_characters
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::on_characters
  */
-template<class T>
-void visus::vvand_config::detail::vvand_config_parser<T>::on_characters(
+template<class TChar>
+void DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::on_characters(
         const char_type *s, const int len) {
     this->cdata.append(s, len);
 }
@@ -57,12 +42,12 @@ void visus::vvand_config::detail::vvand_config_parser<T>::on_characters(
 /*
  * visus::vvand_config:detail:::vvand_config_parser<T>::on_end_element
  */
-template<class T>
-void visus::vvand_config::detail::vvand_config_parser<T>::on_end_element(
+template<class TChar>
+void DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::on_end_element(
         const char_type *name) {
 #define THROW_UNEXPECTED_TAG(tag)                                              \
     /*throw exception_type(_X("Closing tag \"") tag _X("\" is unexpected here."),*/\
-    throw exception_type(DPYCNF_TPL_LITERAL(T, "Closing tag is unexpected here."),\
+    throw exception_type(DPYCNF_TPL_LITERAL(TChar, "Closing tag is unexpected here."),\
         this->current_line_number(), this->current_column_number(),            \
         __FILE__, __LINE__)
 
@@ -194,10 +179,10 @@ void visus::vvand_config::detail::vvand_config_parser<T>::on_end_element(
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::on_start_element
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::on_start_element
  */
-template<class T>
-void visus::vvand_config::detail::vvand_config_parser<T>::on_start_element(
+template<class TChar>
+void DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::on_start_element(
         const char_type *name, const char_type **atts) {
     // Clear old CDATA
     this->cdata.clear();
@@ -252,128 +237,128 @@ void visus::vvand_config::detail::vvand_config_parser<T>::on_start_element(
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_height
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_height
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_height
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_height
 = DPYCNF_XML_LITERAL("Height");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_left_offset
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_left_offset
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_left_offset
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_left_offset
 = DPYCNF_XML_LITERAL("LeftOffset");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_identity
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_identity
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_identity
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_identity
 = DPYCNF_XML_LITERAL("Identity");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_machine
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_machine
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_machine
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_machine
 = DPYCNF_XML_LITERAL("Machine");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_machines
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_machines
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_machines
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_machines
 = DPYCNF_XML_LITERAL("Machines");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_name
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_name
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_name
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_name
 = DPYCNF_XML_LITERAL("Name");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_stereo_channel
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_stereo_channel
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_stereo_channel
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_stereo_channel
 = DPYCNF_XML_LITERAL("StereoChannel");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_tile
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_tile
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_tile
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_tile
 = DPYCNF_XML_LITERAL("Tile");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_tiled_display
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_tiled_display
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_tiled_display
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_tiled_display
 = DPYCNF_XML_LITERAL("TiledDisplay");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_tiles
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_tiles
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_tiles
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_tiles
 = DPYCNF_XML_LITERAL("Tiles");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_top_offset
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_top_offset
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_top_offset
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_top_offset
 = DPYCNF_XML_LITERAL("TopOffset");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_width
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_width
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_width
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_width
 = DPYCNF_XML_LITERAL("Width");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_window_height
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_window_height
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_window_height
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_window_height
 = DPYCNF_XML_LITERAL("WindowHeight");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_window_width
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_window_width
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_window_width
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_window_width
 = DPYCNF_XML_LITERAL("WindowWidth");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_window_left
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_window_left
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_window_left
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_window_left
 = DPYCNF_XML_LITERAL("WindowLeft");
 
 
 /*
- * visus::vvand_config::detail::vvand_config_parser<T>::tag_window_top
+ * DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<T>::tag_window_top
  */
-template<class T> const XML_Char *
-visus::vvand_config::detail::vvand_config_parser<T>::tag_window_top
+template<class TChar> const XML_Char *
+DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::tag_window_top
 = DPYCNF_XML_LITERAL("WindowTop");
