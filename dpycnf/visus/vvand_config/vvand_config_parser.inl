@@ -91,7 +91,7 @@ void DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::on_end_element(
     } else if (base::are_strings_equal(name, tag_tile, false)) {
         if (this->currentScope == scope::tile) {
             this->currentScope = scope::tiles;
-            this->currentMachine._tiles.push_back(this->currentTile);
+            this->currentMachine._tiles.push_back(std::move(this->currentTile));
         } else {
             THROW_UNEXPECTED_TAG(tag_tile);
         }
@@ -206,7 +206,7 @@ void DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::on_start_element(
 
     } else if (base::are_strings_equal(name, tag_tile, false)) {
         this->currentScope = scope::tile;
-        this->currentTile = tile_type();
+        this->currentTile = std::move(tile_type());
 
     } else if (base::are_strings_equal(name, tag_left_offset, false)) {
         // Nothing to do.
