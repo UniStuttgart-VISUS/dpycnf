@@ -34,7 +34,6 @@
     <ClInclude Include="visus\vvand_config\xml_exception.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="visus\vvand_config\display_configuration.inl" />
     <None Include="visus\vvand_config\machine.inl" />
     <None Include="visus\vvand_config\sax_parser.inl" />
@@ -175,13 +174,5 @@
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\expat.v143.2.4.1.1\build\native\expat.v143.targets" Condition="Exists('..\packages\expat.v143.2.4.1.1\build\native\expat.v143.targets')" />
-  </ImportGroup>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\expat.v143.2.4.1.1\build\native\expat.v143.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\expat.v143.2.4.1.1\build\native\expat.v143.targets'))" />
-  </Target>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

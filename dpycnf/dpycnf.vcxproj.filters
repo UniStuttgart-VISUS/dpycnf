@@ -80,6 +80,5 @@
     <None Include="visus\vvand_config\machine.inl">
       <Filter>Header Files\visus\vvand_config</Filter>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
 </Project>
