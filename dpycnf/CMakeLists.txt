@@ -21,4 +21,3 @@ FetchContent_MakeAvailable(expat)
 add_library(dpycnf INTERFACE)
 
 target_include_directories(dpycnf INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(dpycnf PUBLIC expat)
