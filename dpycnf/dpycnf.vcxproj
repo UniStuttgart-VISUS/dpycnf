@@ -41,6 +41,9 @@
     <None Include="visus\vvand_config\vvand_config_parser.inl" />
     <None Include="visus\vvand_config\xml_exception.inl" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{63248D1B-8312-4C4D-A1D7-4F0ACA0E7579}</ProjectGuid>
