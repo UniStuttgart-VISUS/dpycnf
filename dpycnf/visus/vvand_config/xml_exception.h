@@ -91,6 +91,15 @@ public:
     }
 
     /// <summary>
+    /// Gets an std::string for an Expat string.
+    /// </summary>
+    template<class TChar, class TTraits, class TAlloc>
+    static inline std::string to_string(
+            const std::basic_string<TChar, TTraits, TAlloc>& errorMsg) {
+        return to_string(errorMsg.c_str());
+    }
+
+    /// <summary>
     /// Create a new exception that represents the Expat error
     /// <paramref name="errorCode" />.
     /// </summary>

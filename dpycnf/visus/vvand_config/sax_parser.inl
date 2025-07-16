@@ -49,8 +49,7 @@ void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::parse_file(
     /* Create a stream and make it throw on I/O errors. */
     std::ifstream stream;
     stream.exceptions(stream.exceptions() | std::ios::failbit);
-    stream.open(xml_exception<TChar>::to_string(path.c_str()),
-        std::ifstream::binary);
+    stream.open(xml_exception<TChar>::to_string(path), std::ifstream::binary);
     stream.exceptions(stream.exceptions() & ~std::ios::failbit);
 
     /* Parse the file incrementally. */
