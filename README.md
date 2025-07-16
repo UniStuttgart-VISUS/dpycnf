@@ -1,10 +1,21 @@
 # dpycnf
-
 [![Build Status](https://visualisierungsinstitut.visualstudio.com/dpycnf/_apis/build/status/UniStuttgart-VISUS.dpycnf?branchName=master)](https://visualisierungsinstitut.visualstudio.com/dpycnf/_build/latest?definitionId=4&branchName=master)
 
-A simple header-only library for XML-based tiled display descriptions used for the Vvand. The library supports the XML format used by different in-house tools at VISUS like vv2, ca and the vvebbrowser.
+A simple header-only library for XML-based tiled display descriptions used for the Vvand. The library supports the XML format used by different in-house tools at VISUS, like vv2, ca and the vvebbrowser.
 
 ## Usage
+The library can be used by simply including it in the `#include` paths of your project. The library requires the [Expat XML parser](https://github.com/libexpat/libexpat) to be installed in the client application. You can use NuGet in Visual Studio to achieve this. If you are building with CMake, the [CMakeLists.txt](dpycnf/CMakeLists.txt) includes a `FetchContent_Declare` such that Expat is downloaded and built to be included directly. You can then use the library as follows:
+```CMake
+FetchContent_Declare(dpycnf
+    GIT_REPOSITORY https://github.com/UniStuttgart-VISUS/dpycnf
+    GIT_PROGRESS ON
+)
+FetchContent_MakeAvailable(dpycnf)
+
+# [...]
+
+target_link_libraries(${PROJECT_NAME} PRIVATE expat dpycnf)
+```
 
 The information from the configuration file is eventually held in the class `visus::vvand_config::display_configuration`. The class is templated with the XML character type of the underlying Expat parser, which you must provide and link with your application. Therefore, you normally want to instantiate `visus::vvand_config::display_configuration<XML_Char>`.
 
