@@ -308,10 +308,13 @@ private:
     visus::vvand_config::size _size;
 
     friend class detail::vvand_config_parser<TChar>;
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
     template<class T> friend void to_json(nlohmann::json&,
         const display_configuration<T>&);
     template<class T> friend void from_json(const nlohmann::json&,
         display_configuration<T>&);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
 };
 
 

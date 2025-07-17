@@ -120,8 +120,11 @@ private:
     size_type _size;
 
     friend class detail::vvand_config_parser<TChar>;
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
     template<class T> friend void to_json(nlohmann::json&, const tile<T>&);
     template<class T> friend void from_json(const nlohmann::json&, tile<T>&);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
 };
 
 

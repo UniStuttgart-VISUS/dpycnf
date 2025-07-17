@@ -70,8 +70,11 @@ private:
     std::vector<tile_type> _tiles;
 
     friend class detail::vvand_config_parser<TChar>;
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
     template<class T> friend void to_json(nlohmann::json&, const machine<T>&);
     template<class T> friend void from_json(const nlohmann::json&, machine<T>&);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
 };
 
 
