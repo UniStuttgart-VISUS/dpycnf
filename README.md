@@ -60,7 +60,7 @@ If [JSON for Modern C++](https://github.com/nlohmann/json) is included before th
 nlohmann::json json = config;
 
 // Print the configuration as JSON.
-std::court << json << std::endl;
+std::cout << json << std::endl;
 
 // Restore a configuration object from JSON.
 auto restored_config = json.template get<visus::vvand_config::display_configuration<XML_Char>>();
