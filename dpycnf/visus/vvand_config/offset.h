@@ -47,6 +47,25 @@ public:
     value_type top;
 };
 
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
+/// <summary>
+/// Converts an offset to JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+inline void to_json(nlohmann::json& json, const offset& value);
+
+/// <summary>
+/// Restores an offset from JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+inline void from_json(const nlohmann::json& json, offset& value);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
+
 DPYCNF_NAMESPACE_END
+
+#include "visus/vvand_config/offset.inl"
 
 #endif /* !defined(_DPYCNF_VISUS_VVAND_CONFIG_OFFSET_H) */

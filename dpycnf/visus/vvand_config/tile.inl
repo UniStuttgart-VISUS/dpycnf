@@ -55,3 +55,84 @@ DPYCNF_NAMESPACE::tile<T>& DPYCNF_NAMESPACE::tile<T>::operator =(
 
     return *this;
 }
+
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
+/*
+ * DPYCNF_NAMESPACE::to_json<TChar>
+ */
+template<class TChar>
+void DPYCNF_NAMESPACE::to_json<TChar>(nlohmann::json& json,
+        const tile<TChar>& value) {
+    json["Channel"] = value._channel;
+    json["Name"] = value._name;
+    json["Offset"] = value._offset;
+
+    if (value._position != nullptr) {
+        json["Position"] = *value._position;
+    }
+
+    json["Size"] = value._size;
+}
+
+
+/*
+ * DPYCNF_NAMESPACE::from_json<TChar>
+ */
+template<class TChar>
+void DPYCNF_NAMESPACE::from_json<TChar>(const nlohmann::json& json,
+        tile<TChar>& value) {
+    {
+        value._channel = stereo_channel::mono;
+
+        auto it = json.find("Channel");
+        if (it != json.end()) {
+            value._channel = it->template get<decltype(value._channel)>();
+        } /* if (it != json.end()) */
+    }
+
+    {
+        auto it = json.find("Name");
+        if (it != json.end()) {
+            value._name = it->template get<decltype(value._name)>();
+        } else {
+            value._name.clear();
+        }
+    }
+
+    {
+        value._offset.left = 0;
+        value._offset.top = 0;
+
+        auto it = json.find("Offset");
+        if (it != json.end()) {
+            value._offset = it->template get<decltype(value._offset)>();
+        }
+    }
+
+    {
+        auto it = json.find("Position");
+        if (it != json.end()) {
+            auto position = it->template get<offset>();
+
+            if (value._position == nullptr) {
+                value._position = new offset(position);
+            } else {
+                *value._position = position;
+            }
+        } else {
+            delete value._position;
+            value._position = nullptr;
+        }
+    }
+
+    {
+        value._size.width = value._size.height = 0;
+
+        auto it = json.find("Size");
+        if (it != json.end()) {
+            value._size = it->template get<decltype(value._size)>();
+        }
+    }
+}
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */

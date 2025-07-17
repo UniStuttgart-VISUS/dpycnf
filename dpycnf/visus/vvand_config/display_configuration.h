@@ -308,7 +308,30 @@ private:
     visus::vvand_config::size _size;
 
     friend class detail::vvand_config_parser<TChar>;
+    template<class T> friend void to_json(nlohmann::json&,
+        const display_configuration<T>&);
+    template<class T> friend void from_json(const nlohmann::json&,
+        display_configuration<T>&);
 };
+
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
+/// <summary>
+/// Converts a display configuration to JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+template<class TChar>
+void to_json(nlohmann::json& json, const display_configuration<TChar>& value);
+
+/// <summary>
+/// Restores a display configuration from JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+template<class TChar>
+void from_json(const nlohmann::json& json, display_configuration<TChar>& value);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
 
 DPYCNF_NAMESPACE_END
 

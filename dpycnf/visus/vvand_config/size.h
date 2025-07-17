@@ -56,6 +56,25 @@ public:
     value_type height;
 };
 
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
+/// <summary>
+/// Converts a size to JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+inline void to_json(nlohmann::json& json, const size value);
+
+/// <summary>
+/// Restores a size from JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+inline void from_json(const nlohmann::json& json, size& value);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
+
 DPYCNF_NAMESPACE_END
+
+#include "visus/vvand_config/size.inl"
 
 #endif /* !defined(_DPYCNF_VISUS_VVAND_CONFIG_SIZE_H) */

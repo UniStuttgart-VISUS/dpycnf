@@ -31,12 +31,16 @@
     <ClInclude Include="visus\vvand_config\stereo_channel.h" />
     <ClInclude Include="visus\vvand_config\tile.h" />
     <ClInclude Include="visus\vvand_config\vvand_config_parser.h" />
+    <ClInclude Include="visus\vvand_config\xmljson.h" />
     <ClInclude Include="visus\vvand_config\xml_exception.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="visus\vvand_config\display_configuration.inl" />
     <None Include="visus\vvand_config\machine.inl" />
+    <None Include="visus\vvand_config\offset.inl" />
     <None Include="visus\vvand_config\sax_parser.inl" />
+    <None Include="visus\vvand_config\size.inl" />
+    <None Include="visus\vvand_config\stereo_channel.inl" />
     <None Include="visus\vvand_config\tile.inl" />
     <None Include="visus\vvand_config\vvand_config_parser.inl" />
     <None Include="visus\vvand_config\xml_exception.inl" />

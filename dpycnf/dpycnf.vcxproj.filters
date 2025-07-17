@@ -60,6 +60,9 @@
     <ClInclude Include="visus\vvand_config\api.h">
       <Filter>Header Files\visus\vvand_config</Filter>
     </ClInclude>
+    <ClInclude Include="visus\vvand_config\xmljson.h">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="visus\vvand_config\tile.inl">
@@ -78,6 +81,15 @@
       <Filter>Header Files\visus\vvand_config</Filter>
     </None>
     <None Include="visus\vvand_config\machine.inl">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </None>
+    <None Include="visus\vvand_config\offset.inl">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </None>
+    <None Include="visus\vvand_config\size.inl">
+      <Filter>Header Files\visus\vvand_config</Filter>
+    </None>
+    <None Include="visus\vvand_config\stereo_channel.inl">
       <Filter>Header Files\visus\vvand_config</Filter>
     </None>
   </ItemGroup>

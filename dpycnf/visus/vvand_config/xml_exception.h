@@ -93,6 +93,14 @@ public:
     /// <summary>
     /// Gets an std::string for an Expat string.
     /// </summary>
+    static inline const std::string& to_string(
+            const std::string& errorMsg) noexcept {
+        return errorMsg;
+    }
+
+    /// <summary>
+    /// Gets an std::string for an Expat string.
+    /// </summary>
     template<class TChar, class TTraits, class TAlloc>
     static inline std::string to_string(
             const std::basic_string<TChar, TTraits, TAlloc>& errorMsg) {

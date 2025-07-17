@@ -12,9 +12,11 @@
 #include <memory>
 #include <string>
 
+
 #include "visus/vvand_config/offset.h"
 #include "visus/vvand_config/size.h"
 #include "visus/vvand_config/stereo_channel.h"
+#include "visus/vvand_config/xmljson.h"
 
 
 DPYCNF_NAMESPACE_BEGIN
@@ -118,7 +120,28 @@ private:
     size_type _size;
 
     friend class detail::vvand_config_parser<TChar>;
+    template<class T> friend void to_json(nlohmann::json&, const tile<T>&);
+    template<class T> friend void from_json(const nlohmann::json&, tile<T>&);
 };
+
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
+/// <summary>
+/// Converts a tile to JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+template<class TChar>
+void to_json(nlohmann::json& json, const tile<TChar>& value);
+
+/// <summary>
+/// Restores a tile from JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+template<class TChar>
+void from_json(const nlohmann::json& json, tile<TChar>& value);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
 
 DPYCNF_NAMESPACE_END
 

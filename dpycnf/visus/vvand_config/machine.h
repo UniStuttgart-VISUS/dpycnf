@@ -70,7 +70,28 @@ private:
     std::vector<tile_type> _tiles;
 
     friend class detail::vvand_config_parser<TChar>;
+    template<class T> friend void to_json(nlohmann::json&, const machine<T>&);
+    template<class T> friend void from_json(const nlohmann::json&, machine<T>&);
 };
+
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
+/// <summary>
+/// Converts a machine to JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+template<class TChar>
+void to_json(nlohmann::json& json, const machine<TChar>& value);
+
+/// <summary>
+/// Restores a timachinele from JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+template<class TChar>
+void from_json(const nlohmann::json& json, machine<TChar>& value);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
 
 DPYCNF_NAMESPACE_END
 

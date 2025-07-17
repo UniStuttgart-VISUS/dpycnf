@@ -33,6 +33,25 @@ enum class stereo_channel {
     right
 };
 
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
+/// <summary>
+/// Converts a stereo channel to JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+inline void to_json(nlohmann::json& json, const stereo_channel value);
+
+/// <summary>
+/// Restores a stereo channel from JSON.
+/// </summary>
+/// <param name="json"></param>
+/// <param name="value"></param>
+inline void from_json(const nlohmann::json& json, stereo_channel& value);
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
+
 DPYCNF_NAMESPACE_END
+
+#include "visus/vvand_config/stereo_channel.inl"
 
 #endif /* !defined(_DPYCNF_VISUS_VVAND_CONFIG_STEREO_CHANNEL_H) */

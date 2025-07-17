@@ -155,3 +155,62 @@ bool DPYCNF_NAMESPACE::display_configuration<TChar>::range(
 
     return retval;
 }
+
+#if defined(NLOHMANN_JSON_VERSION_MAJOR)
+/*
+ * DPYCNF_NAMESPACE::to_json<TChar>
+ */
+template<class TChar>
+void DPYCNF_NAMESPACE::to_json<TChar>(nlohmann::json& json,
+        const display_configuration<TChar>& value) {
+    auto& machines = json["Machines"] = nlohmann::json::array();
+    std::copy(value._machines.begin(),
+        value._machines.end(),
+        std::back_inserter(machines));
+
+    json["Name"] = value._name;
+    json["Size"] = value._size;
+}
+
+
+/*
+ * DPYCNF_NAMESPACE::from_json<TChar>
+ */
+template<class TChar>
+void DPYCNF_NAMESPACE::from_json<TChar>(const nlohmann::json& json,
+        display_configuration<TChar>& value) {
+    {
+        typedef display_configuration<TChar>::machine_type machine_type;
+        value._machines.clear();
+
+        auto it = json.find("Machines");
+        if (it != json.end()) {
+            value._machines.reserve(it->size());
+            std::transform(it->begin(),
+                it->end(),
+                std::back_inserter(value._machines),
+                [](const nlohmann::json& m) {
+                    return m.template get<machine_type>();
+                });
+        } /* if (it != json.end()) */
+    }
+
+    {
+        auto it = json.find("Name");
+        if (it != json.end()) {
+            value._name = it->template get<decltype(value._name)>();
+        } else {
+            value._name.clear();
+        }
+    }
+
+    {
+        value._size.width = value._size.height = 0;
+
+        auto it = json.find("Size");
+        if (it != json.end()) {
+            value._size = it->template get<decltype(value._size)>();
+        }
+    }
+}
+#endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */

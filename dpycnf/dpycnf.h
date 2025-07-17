@@ -8,21 +8,6 @@
 #define _DPYCNF_H
 #pragma once
 
-
-/// <summary>
-/// A helper for implementing <see cref="DPYCNF_CONCAT" />.
-/// </summary>
-#define _DPYCNF_CONCAT(l, r) l ##r
-
-/// <summary>
-/// Concatenates two preprocessor symbols.
-/// </summary>
-/// <param name="l">The left-hand side operand.</param>
-/// <param name="r">The right-hand side operand.</param>
-#define DPYCNF_CONCAT(l, r) _DPYCNF_CONCAT(l, r)
-
-
-
 #include "visus/vvand_config/display_configuration.h"
 #include "visus/vvand_config/machine.h"
 #include "visus/vvand_config/offset.h"
