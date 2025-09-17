@@ -65,3 +65,33 @@ std::cout << json << std::endl;
 // Restore a configuration object from JSON.
 auto restored_config = json.template get<visus::vvand_config::display_configuration<XML_Char>>();
 ```
+
+Using the same JSON library, the `ndisplay_builder` can be used to create a configuration file for Unreal Engine's nDisplay system:
+```c++
+// Load the XML configuration.
+auto config = visus::vvand_config::display_configuration<char>::load("vvand.xml");
+
+// Create a builder and provide the information missing in the XML file.
+visus::vvand_config::ndisplay_builder<char> builder;
+
+// Tell nDisplay about the head node, its IP address and the size of the preview shown there.
+builder.controlled_by("minyou").add_ip_address("minyou", "10.35.3.1").with_preview_width(2592);
+
+// Configure the physical size of the tiled display in centimetres.
+builder.with_physical_width(600.0f).with_physical_height(224.0f);
+
+// Add the IP addresses of the rendering nodes.
+builder.add_ip_address("keshiki01", "10.35.1.1").add_ip_address("keshiki02", "10.35.1.2"); // etc.
+
+// Alterntively, a JSON object holding the addresses can be used.
+nlohman::json addresses = { 
+    { "keshiki01", "10.35.1.1" },
+    { "keshiki02", "10.35.1.2" },
+    // etc.
+};
+builder.add_ip_addresses(addresses);
+
+// Create the JSON configuration for nDisplay.
+const auto ndisplay = builder.build(config);
+std::cout << std::setw(4) << ndisplay << std::endl;
+```
