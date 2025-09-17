@@ -64,6 +64,20 @@ public:
 typedef basic_size<std::uint32_t> size;
 
 
+/// <summary>
+/// Initialises a new size object.
+/// </summary>
+/// <typeparam name="TValue">The type to measure width and height.</typeparam>
+/// <param name="width">The initial width.</param>
+/// <param name="height">The initial height.</param>
+/// <returns>The newly created object.</returns>
+template<class TValue>
+inline basic_size<TValue> make_size(const TValue width,
+        const TValue height) noexcept {
+    return basic_size<TValue>(width, height);
+}
+
+
 #if defined(NLOHMANN_JSON_VERSION_MAJOR)
 /// <summary>
 /// Converts a size to JSON.

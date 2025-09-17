@@ -51,6 +51,8 @@ nlohmann::json DPYCNF_NAMESPACE::ndisplay_builder<TChar>::build(
             / static_cast<float>(total_virtual_size.width);
         const auto height = static_cast<std::uint32_t>(0.5f + aspect
             * static_cast<float>(this->_preview));
+        const auto physical_width = this->_preview / 23.368f;
+        const auto physical_height = height / 23.368f;
 
         auto& node = nodes[this->_head_node] = {
             { "host", this->address(this->_head_node) },
@@ -59,23 +61,32 @@ nlohmann::json DPYCNF_NAMESPACE::ndisplay_builder<TChar>::build(
         };
 
         auto& screen = screens["preview"] = make_xform();
-        screen["parentId"] = "room_origin";
+        screen["parentId"] = "preview_location";
         screen["size"] = {
-            { "width", this->_preview / 233.68f },
-            { "height", height / 233.68f }
+            { "width", physical_width },
+            { "height", physical_height }
         };
 
         auto& vp = node["viewports"]["vp_preview"] = make_viewport(offset(),
-            size(this->_preview, height), "preview", stereo_channel::mono);
+            config.size(), "preview", stereo_channel::mono);
 
-        node["window"] = vp["region"];
+        node["window"] = {
+            { "x", 0 },
+            { "y", 0 },
+            { "w", this->_preview },
+            { "h", height }
+        };
+
+        auto& xform = xforms["preview_location"] = make_xform(
+            -10, this->_width, -0.25f * this->_height);
+        xform["parentId"] = "powerwall_origin";
     }
 
     xforms["room_origin"] = make_xform();
     // Make the Powerwall's origin the top-left corner. Note that the nDisplay
     // base coordinate is weird in that y is left and z is up.
     auto& pw_origin = xforms["powerwall_origin"] = make_xform(
-        0.0f, -0.5f * this->_width, this->_height);
+        0.0f, -0.5f * this->_width, 0.5f * this->_height);
     pw_origin["parentId"] = "room_origin";
 
     for (auto& m : config) {
@@ -87,10 +98,10 @@ nlohmann::json DPYCNF_NAMESPACE::ndisplay_builder<TChar>::build(
 
         for (auto& t : m) {
             const auto virtual_pos = t.offset();
-            const auto physical_pos = basic_offset<float>(
+            const auto physical_pos = make_offset(
                 (this->_width * virtual_pos.left) / total_virtual_size.width,
                 -(this->_height * virtual_pos.top) / total_virtual_size.height);
-            const auto physical_size = basic_size<float>(
+            const auto physical_size = make_size(
                 (this->_width * t.size().width) / total_virtual_size.width,
                 (this->_height * t.size().height) / total_virtual_size.height);
             const auto window_pos = (t.position() == nullptr)

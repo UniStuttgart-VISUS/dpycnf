@@ -56,6 +56,21 @@ public:
 typedef basic_offset<std::uint32_t> offset;
 
 
+/// <summary>
+/// Initialises a new offset object.
+/// </summary>
+/// <typeparam name="TValue">The type to measure the offset on one axis.
+/// </typeparam>
+/// <param name="left">The left offset of the tile.</param>
+/// <param name="top">The top offset of the tile.</param>
+/// <returns>The newly created object.</returns>
+template<class TValue>
+inline basic_offset<TValue> make_offset(const TValue width,
+        const TValue height) noexcept {
+    return basic_offset<TValue>(width, height);
+}
+
+
 #if defined(NLOHMANN_JSON_VERSION_MAJOR)
 /// <summary>
 /// Converts an offset to JSON.
