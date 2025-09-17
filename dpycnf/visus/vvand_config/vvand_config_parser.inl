@@ -183,7 +183,7 @@ void DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::on_end_element(
  */
 template<class TChar>
 void DPYCNF_DETAIL_NAMESPACE::vvand_config_parser<TChar>::on_start_element(
-        const char_type *name, const char_type **atts) {
+        const char_type *name, const char_type **) {
     // Clear old CDATA
     this->cdata.clear();
 

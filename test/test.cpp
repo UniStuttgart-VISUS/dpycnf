@@ -23,6 +23,9 @@
 /// <returns></returns>
 int _tmain(int argc, TCHAR **argv) {
     typedef visus::vvand_config::display_configuration<XML_Char> config_type;
+    UNREFERENCED_PARAMETER(argc);
+    UNREFERENCED_PARAMETER(argv);
+
     try {
         auto config = config_type::load(_X("..\\vvand10.xml"));
 

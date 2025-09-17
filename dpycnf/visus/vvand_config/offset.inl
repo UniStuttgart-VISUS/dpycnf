@@ -9,7 +9,9 @@
 /*
  * DPYCNF_NAMESPACE::to_json
  */
-void DPYCNF_NAMESPACE::to_json(nlohmann::json& json, const offset& value) {
+template<class TValue>
+void DPYCNF_NAMESPACE::to_json(nlohmann::json& json,
+        const basic_offset<TValue>& value) {
     json["Left"] = value.left;
     json["Top"] = value.top;
 }
@@ -18,7 +20,9 @@ void DPYCNF_NAMESPACE::to_json(nlohmann::json& json, const offset& value) {
 /*
  * DPYCNF_NAMESPACE::from_json
  */
-void DPYCNF_NAMESPACE::from_json(const nlohmann::json& json, offset& value) {
+template<class TValue>
+void DPYCNF_NAMESPACE::from_json(const nlohmann::json& json,
+        basic_offset<TValue>& value) {
     {
         auto it = json.find("Left");
         if (it != json.end()) {

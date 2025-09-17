@@ -18,22 +18,24 @@ DPYCNF_NAMESPACE_BEGIN
 /// <summary>
 /// Defines offsets of tiles.
 /// </summary>
-class offset {
+/// <typeparam name="TValue">The type to measure the offset on one axis.
+/// </typeparam>
+template<class TValue> class basic_offset final {
 
 public:
 
     /// <summary>
     /// The type to measure the offset on one axis.
     /// </summary>
-    typedef unsigned int value_type;
+    typedef TValue value_type;
 
     /// <summary>
     /// Initialises a new instance.
     /// </summary>
     /// <param name="left">The left offset of the tile.</param>
     /// <param name="top">The top offset of the tile.</param>
-    inline offset(const value_type left = 0,
-            const value_type top = 0) noexcept
+    inline basic_offset(const value_type left = static_cast<value_type>(0),
+            const value_type top = static_cast<value_type>(0)) noexcept
         : left(left), top(top) { }
 
     /// <summary>
@@ -48,20 +50,32 @@ public:
 };
 
 
+/// <summary>
+/// Defines offsets of tiles.
+/// </summary>
+typedef basic_offset<std::uint32_t> offset;
+
+
 #if defined(NLOHMANN_JSON_VERSION_MAJOR)
 /// <summary>
 /// Converts an offset to JSON.
 /// </summary>
+/// <typeparam name="TValue">The type to measure the offset on one axis.
+/// </typeparam>
 /// <param name="json"></param>
 /// <param name="value"></param>
-inline void to_json(nlohmann::json& json, const offset& value);
+template<class TValue>
+inline void to_json(nlohmann::json& json, const basic_offset<TValue>& value);
 
 /// <summary>
 /// Restores an offset from JSON.
 /// </summary>
+/// <typeparam name="TValue">The type to measure the offset on one axis.
+/// </typeparam>
 /// <param name="json"></param>
 /// <param name="value"></param>
-inline void from_json(const nlohmann::json& json, offset& value);
+template<class TValue>
+inline void from_json(const nlohmann::json& json, basic_offset<TValue>& value);
 #endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
 
 DPYCNF_NAMESPACE_END

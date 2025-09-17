@@ -9,7 +9,9 @@
 /*
  * DPYCNF_NAMESPACE::to_json
  */
-void DPYCNF_NAMESPACE::to_json(nlohmann::json& json, const size value) {
+template<class TValue>
+void DPYCNF_NAMESPACE::to_json(nlohmann::json& json,
+        const basic_size<TValue>& value) {
     json["Width"] = value.width;
     json["Height"] = value.height;
 }
@@ -18,7 +20,9 @@ void DPYCNF_NAMESPACE::to_json(nlohmann::json& json, const size value) {
 /*
  * DPYCNF_NAMESPACE::from_json
  */
-void DPYCNF_NAMESPACE::from_json(const nlohmann::json& json, size& value) {
+template<class TValue>
+void DPYCNF_NAMESPACE::from_json(const nlohmann::json& json,
+        basic_size<TValue>& value) {
     {
         auto it = json.find("Width");
         if (it != json.end()) {

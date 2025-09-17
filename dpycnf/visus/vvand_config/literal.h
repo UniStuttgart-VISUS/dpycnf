@@ -34,20 +34,24 @@ template<class TChar> struct literal_selector {
 
 template<> struct literal_selector<char> {
     typedef char char_type;
-    static const char_type select(const char n, const wchar_t w) {
+    static constexpr char_type select(const char n,
+            const wchar_t) noexcept {
         return n;
     }
-    static const char_type *select(const char *n, const wchar_t *w) {
+    static constexpr const char_type *select(const char *n,
+            const wchar_t *) noexcept {
         return n;
     }
 };
 
 template<> struct literal_selector<wchar_t> {
     typedef wchar_t char_type;
-    static const char_type select(const char n, const wchar_t w) {
+    static constexpr char_type select(const char,
+            const wchar_t w) noexcept {
         return w;
     }
-    static const char_type *select(const char *n, const wchar_t *w) {
+    static constexpr const char_type *select(const char *,
+            const wchar_t *w) noexcept {
         return w;
     }
 };

@@ -39,8 +39,6 @@ DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::~sax_parser(void) noexcept {
 template<class TChar>
 void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::parse_file(
         const string_type& path) {
-    std::size_t bytesRead = 0;
-
     /* Sanity checks. */
     if (this->buffer.empty()) {
         this->buffer.resize(sax_parser::default_buffer_size);
@@ -100,8 +98,18 @@ bool DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::are_strings_equal(
         string_type r(s2);
 
         if (!isCaseSensitive) {
-            std::transform(l.begin(), l.end(), l.begin(), ::tolower);
-            std::transform(r.begin(), r.end(), r.begin(), ::tolower);
+            std::transform(l.begin(),
+                l.end(),
+                l.begin(),
+                [](const char_type c) {
+                    return static_cast<char_type>(std::tolower(c));
+                });
+            std::transform(r.begin(),
+                r.end(),
+                r.begin(),
+                [](const char_type c) {
+                    return static_cast<char_type>(std::tolower(c));
+                });
         }
 
         return (l == r);
@@ -114,7 +122,7 @@ bool DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::are_strings_equal(
  */
 template<class TChar>
 void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_characters(
-        const char_type *s, const int len) {
+        const char_type *, const int) {
     // Do nothing.
 }
 
@@ -124,7 +132,7 @@ void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_characters(
  */
 template<class TChar>
 void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_end_element(
-        const char_type *name) {
+        const char_type *) {
     // Do nothing.
 }
 
@@ -134,6 +142,6 @@ void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_end_element(
  */
 template<class TChar>
 void DPYCNF_DETAIL_NAMESPACE::sax_parser<TChar>::on_start_element(
-        const char_type *name, const char_type **atts) {
+        const char_type *, const char_type **) {
     // Do nothing.
 }

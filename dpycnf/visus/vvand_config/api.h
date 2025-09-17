@@ -13,7 +13,7 @@
  * Update the ABI version (i.e. if something in the interface changes) here:  *
 \******************************************************************************/
 #define DPYCNF_ABI_MAJOR 1
-#define DPYCNF_ABI_MINOR 0
+#define DPYCNF_ABI_MINOR 1
 
 
 /// <summary>

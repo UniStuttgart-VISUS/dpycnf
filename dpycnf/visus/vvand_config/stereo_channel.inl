@@ -37,8 +37,12 @@ void DPYCNF_NAMESPACE::from_json(const nlohmann::json& json,
 
     if (json.is_string()) {
         auto channel = json.get<std::string>();
-        std::transform(channel.begin(), channel.end(), channel.begin(),
-            [](unsigned char c) { return std::tolower(c); });
+        std::transform(channel.begin(),
+            channel.end(),
+            channel.begin(),
+            [](unsigned char c) {
+                return static_cast<unsigned char>(std::tolower(c));
+            });
 
         if (channel == "left") {
             value = stereo_channel::left;

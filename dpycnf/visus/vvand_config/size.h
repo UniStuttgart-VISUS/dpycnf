@@ -18,22 +18,23 @@ DPYCNF_NAMESPACE_BEGIN
 /// <summary>
 /// Specifies a two-dimensional size.
 /// </summary>
-class size {
+/// <typeparam name="TValue">The type to measure width and height.</typeparam>
+template<class TValue> class basic_size final {
 
 public:
 
     /// <summary>
     /// The type to measure width and height.
     /// </summary>
-    typedef unsigned int value_type;
+    typedef TValue value_type;
 
     /// <summary>
     /// Initialises a new instance.
     /// </summary>
     /// <param name="width">The width of the area.</param>
     /// <param name="height">The height of the area.</param>
-    inline size(const value_type width = 0,
-            const value_type height = 0) noexcept
+    inline basic_size(const value_type width = static_cast<value_type>(0),
+            const value_type height = static_cast<value_type>(0)) noexcept
         : width(width), height(height) { }
 
     /// <summary>
@@ -42,7 +43,7 @@ public:
     /// <returns><c>true</c> if the area is empty, <c>false</c> otherwise.
     /// </returns>
     inline bool empty(void) const {
-        return (this->width * this->height == 0);
+        return (this->width * this->height == static_cast<value_type>(0));
     }
 
     /// <summary>
@@ -57,20 +58,30 @@ public:
 };
 
 
+/// <summary>
+/// Specifies a two-dimensional size in pixels.
+/// </summary>
+typedef basic_size<std::uint32_t> size;
+
+
 #if defined(NLOHMANN_JSON_VERSION_MAJOR)
 /// <summary>
 /// Converts a size to JSON.
 /// </summary>
 /// <param name="json"></param>
 /// <param name="value"></param>
-inline void to_json(nlohmann::json& json, const size value);
+/// <typeparam name="TValue">The type to measure width and height.</typeparam>
+template<class TValue>
+inline void to_json(nlohmann::json& json, const basic_size<TValue>& value);
 
 /// <summary>
 /// Restores a size from JSON.
 /// </summary>
 /// <param name="json"></param>
 /// <param name="value"></param>
-inline void from_json(const nlohmann::json& json, size& value);
+/// <typeparam name="TValue">The type to measure width and height.</typeparam>
+template<class TValue>
+inline void from_json(const nlohmann::json& json, basic_size<TValue>& value);
 #endif /* defined(NLOHMANN_JSON_VERSION_MAJOR) */
 
 DPYCNF_NAMESPACE_END
